@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi página HTML5</title>
+  </head>
+
+  <body>
+    <form action="" id="form_1">
+      <div id="div-1">
+        <fieldset>
+          <label for="marca">marca:</label>
+          <select name="marca" id="marca" required>
+            <option value="renault">Renault</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="citroen">Citroen</option>
+          </select>
+          <label for="modelo">modelo:</label>
+          <select name="modelo" id="modelo" style="width: 300px" required>
+            <option value="clio" class="renault">Clio</option>
+            <option value="captur" class="renault">Captur</option>
+            <option value="clase-a" class="mercedes">Clase A</option>
+            <option value="clase-b" class="mercedes">Clase B</option>
+            <option value="c3" class="citroen">C3</option>
+            <option value="c4" class="citroen">C4</option>
+          </select>
+          <label for="pais">País</label>
+          <select name="pais" id="pais">
+            <optgroup label="America">
+              <option value="usa">USA</option>
+              <option value="canada">Canada</option>
+              <option value="mexico">Mexico</option>
+            </optgroup>
+            <optgroup label="Europa">
+              <option value="espana">España</option>
+              <option value="italia">Italia</option>
+              <option value="alemania">Alemania</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option value="japon">Japón</option>
+              <option value="china">China</option>
+              <option value="korea">Korea</option>
+            </optgroup>
+          </select>
+        </fieldset>
+      </div>
+
+      <div id="div-2">
+        <label for="cilindrada">Cilindrada</label>
+        <input type="text" name="cilindrada" id="cilindrada" />
+        <label for="tipo-motor">Tipo de motor:</label>
+        <select name="tipo-motor" id="tipo-motor">
+          <option value="12v">12V</option>
+          <option value="10v">10V</option>
+          <option value="8v">8V</option>
+          <option value="6v">6V</option>
+          <option value="6l">6L</option>
+          <option value="4-boxer">4Boxer</option>
+          <option value="4-linea">4Linea</option>
+        </select>
+        <div>
+          <label for="revoluciones">Revoluciones por minuto</label>
+          <br />
+          <input
+            type="range"
+            min="4000"
+            max="22000"
+            name="revoluciones"
+            id="revoluciones"
+          />
+          <p id="mostrar-revolucions"></p>
+        </div>
+      </div>
+
+      <div id="div-3">
+        <label for="fotografia">Fotografia</label>
+        <input type="file" name="fotografia" id="fotografia" accept="image/*" />
+
+        <label for="velocidad-maxima">Velocidad maxima</label>
+        <input
+          type="text"
+          name="velocidad-maxima"
+          id="velocidad-maxima"
+          placeholder="333km/h"
+        />
+        <label for="combustible">Combustible</label>
+        <fieldset name="combustible" id="combustible" style="width: 100px">
+          <input
+            type="radio"
+            id="gasolina"
+            name="combustible"
+            value="gasolina"
+          />
+          <label for="gasolina">Gasolina</label><br />
+          <input type="radio" id="diesel" name="combustible" value="gasolina" />
+          <label for="diesel">Diesel</label><br />
+          <input
+            type="radio"
+            id="alcohol"
+            name="combustible"
+            value="gasolina"
+          />
+          <label for="alcohol">Alcohol</label>
+        </fieldset>
+      </div>
+
+      <div id="div-4">
+        <label for="produccion">En producción</label>
+        <input type="checkbox" name="produccion" id="produccion" />
+        <label for="codigo-interno">Codigo Interno</label>
+        <input type="text" name="codigo-interno" id="codigo-interno" />
+        <label for="color-coche">Color del coche:</label>
+        <input type="color" name="color-coche" id="color-coche" />
+      </div>
+
+      <div id="div-5">
+        <fieldset style="width: 200px">
+          <p>Opciones</p>
+          <label for="direccion-asistida">Direccion asistida</label>
+          <input
+            type="checkbox"
+            name="direccion-asistida"
+            id="direccion-asistida"
+          /><br />
+          <label for="elevalunas">Elevalunas Electrico</label>
+          <input type="checkbox" name="elevalunas" id="elevalunas" /><br />
+          <label for="radiocassette">RadioCassette</label>
+          <input type="checkbox" name="radiocassette" id="radiocassette" />
+        </fieldset>
+      </div>
+      <input type="submit" name="enviar" id="enviar" value="Enviar" />
+      <input type="submit" name="reiniciar" id="reiniciar" value="Reiniciar" />
+      <br />
+      <fieldset><img src="" alt="imagen-cargada" /></fieldset>
+    </form>
+
+    <script>
+      function inicialitzar() {
+        let slider = document.getElementById("revoluciones");
+        let mostrar = document.getElementById("mostrar-revolucions");
+        mostrar.innerHTML = slider.value;
+        slider.oninput = function () {
+          mostrar.innerHTML = this.value;
+        };
+
+        let vel_maxima = document.getElementById("velocidad-maxima");       
+
+        vel_maxima.onmouseleave = function () {
+          let valor_vel = parseInt(vel_maxima.value);
+          if (isNaN(valor_vel) || valor_vel < 100 || valor_vel > 999) {
+            vel_maxima.value = "111km/h";
+          } else {
+            vel_maxima.value = valor_vel + "km/h";
+          }
+        };
+      }
+      document.addEventListener("DOMContentLoaded", inicialitzar);
+    </script>
+  </body>
+</html>
