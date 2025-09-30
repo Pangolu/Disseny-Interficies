@@ -8,11 +8,12 @@
     }
     div, span{
         border: 1px dashed grey;
+        
     }
     body > div{
         background-color: aliceblue;
     }
-    div > *{
+    div > *:not(.fondo){
         background-color: lightpink;
     }
     div > .fondo{
@@ -31,11 +32,11 @@
         text-decoration-color:cyan;
         text-decoration-style: wavy;
     }
-    div + p + div{
+    div + div + p{
         background-color: darkmagenta;
         color: khaki;
     }
-    h3 + div + div{
+    h3 ~ div + div{
         border: 2px solid green;
         border-radius: 10px;
     }
