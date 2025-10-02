@@ -1,0 +1,107 @@
+
+/*:root {
+	font-size:0.8cm;
+}*/
+/*
+body {
+	font-size:1.5cm;
+}*/
+
+/* cuando se activa la clase anterior del body, ésta clase muestra que la fuente root no
+cambia y los div con esta clase siguen siendo normales en cuanto a fuente . cuando activamos la
+clase :root anterior, ésto sí cambia */
+
+
+.rem1{
+font-size: 1.4rem;
+}
+
+.emx14 {
+
+	font-size: 1.4em;
+	}
+
+.remx14 {
+	background-color:lightblue;
+	font-size: 1.4rem;
+	}
+	
+.inicial{
+font-size: initial;
+	}
+
+h2{
+	
+}
+
+/*span {
+	font-size: 50%;
+}*/
+
+/*
+div > span {
+	font-size: inherit;
+}*/
+
+.ancho400{
+	font-size: 2em;
+	border:1px solid red;
+	
+}
+
+.mitadAncho {
+	width: 50%;
+	font-size: 0.5em;
+	border:1px solid blue;
+
+
+}
+
+.tercioPantalla{
+	font-size: 1.5vw;
+	width: 33vw;
+	border:1px solid orange;
+
+	
+	}
+
+.decimoAltoPantalla{
+	height: 10vh;
+	border:1px solid red;
+
+	}
+	
+.decimoAltoPantallaP{
+	border:1px dashed magenta;
+
+	}
+
+
+.decimoAnchoAlto{
+	border:1px solid green;
+	width: 50%;
+	height: 20vw;
+	}
+
+.cmcm { 
+	font-size: 1cm;
+}
+
+.cmmm { 
+	font-size: 10mm;
+}
+
+.cmin { 
+	font-size: 0.3937in;
+}
+
+.cmpx { 
+
+	font-size: 38px;
+	
+}
+
+.cmpt { 
+	font-size: 28.35pt;
+	
+}

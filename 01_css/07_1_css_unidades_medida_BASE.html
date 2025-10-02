@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <h1>Informaci&oacute;n obtenida desde javascript</h1>
+    <div id="info" style="border: 1px solid grey"></div>
+    <script>
+      var datos = document.getElementById("info");
+
+      function inicializar() {
+        datos.innerHTML = `<p><b>window.devicePixelRatio:</b> ${window.devicePixelRatio}</p>
+        <p><b>window.innerWidth:</b> ${window.innerWidth}</p>
+        <p><b>window.innerHeight:</b> ${window.innerHeight}</p>
+        <p><b>window.outerHeight:</b> ${window.outerHeight}</p>
+        <p><b>visualViewport.height:</b> ${window.visualViewport.height}</p>
+        <p><b>visualViewport.scale:</b> ${window.visualViewport.scale}</p>
+        <p><b>document.body.scrollHeight:</b> ${document.body.scrollHeight}</p>
+        <p><b>screen.width:</b> ${screen.width}</p>
+        <p><b>screen.height:</b> ${screen.height}</p>
+        <p><b>screen.availHeight:</b> ${screen.availHeight}</p>`;
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+      window.addEventListener("resize", inicializar);
+    </script>
+  </body>
+</html>
