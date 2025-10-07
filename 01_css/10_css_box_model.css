@@ -1,0 +1,28 @@
+.contenedor{
+    width: initial;
+    border: 1px solid black;
+}
+
+.superior{
+    width: 50%;
+    border: 1px solid red;
+    outline: 40px solid blue;
+    margin: 1em;
+    margin-bottom: 80px;
+    padding: 2em;
+}
+
+.inferior{
+    width: 50%;
+    border: 1px dotted black;
+}
+
+.enLinea{
+    border: 1px solid black;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 5px;
+    outline: 10px solid green;
+}
