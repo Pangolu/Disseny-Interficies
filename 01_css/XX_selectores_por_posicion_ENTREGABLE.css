@@ -1,0 +1,133 @@
+body {
+	background:lightyellow;
+}
+
+.contenedor, div  {
+	margin:10px;
+
+}
+
+.elem {
+	margin:3px;
+	border:1px solid black;
+	padding:4px;
+	width:2em;
+	display:inline-block;
+}
+
+
+
+
+/*box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;*/
+/*box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;*/
+/* 	background-image: url("850csi.jpeg"); */
+/* border-radius: 2px*/
+/*
+	background-image: url("../imagenes/mortadelo.jpeg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	*/
+
+.descripcion{
+	padding:.3em;
+	font-family:'Courier New', Courier, monospace;
+	font-size:1rem;
+}
+
+
+:first-child {
+	border : 2px solid blue;
+}
+
+
+div > :first-child{
+	background-image: url("mortadelo.jpeg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+div:first-child{ /*no és el mateix div:first-child que div :first-child, si esta junt ha de complir les dos condicions*/
+	border-radius: 5px;
+	background-color:lightgreen;
+}
+
+.minicontenedor:first-child{
+	outline:10px solid orange;
+}
+
+div :first-child {
+	outline:7px solid magenta;
+}
+
+
+ {
+	border:10px solid red;
+}
+
+ {
+	border:10px solid red;
+}
+
+ {
+	outline: 3px dotted darkblue;
+}
+
+
+
+ {
+	font-size:0.76em;
+}
+
+.contenedor :nth-child(4){
+	background-color:blue;
+	color:white;
+}
+
+/* An + B     A: paso  B: desplazamiento inicial  + - afectan a la n */
+
+#sinco :nth-child(3n), #sei :nth-child(3n + 6), #ciete :nth-child(-4n+10), #ocho :nth-child(2n + 8){
+box-shadow: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
+}
+
+
+
+
+/* 2, 5, 8  de un total de 16 (clase supercontenedor) */
+{
+	background-color:lightblue;
+
+}
+
+
+/* 2, 5, 8  de un total de 16 (clase supercontenedor) */
+
+
+ {
+	background:lightseagreen;
+	}
+{
+	outline:2px dotted red;
+}
+
+{
+	color:white;
+	font-weight: bold;
+
+}
+
+{
+	border:4px solid black;
+}
+
+ {
+	color:white;
+}
+
+ {
+}
+
+
+
+
+
+

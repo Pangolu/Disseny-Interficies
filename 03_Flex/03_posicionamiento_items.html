@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="./03_posicionamiento_items.css">
+
+<style>
+
+</style>
+
+<script>
+
+function generaContainer(clasesContenedor, clasesItem,nItems,longText){
+
+	let contenedor = document.createElement("div");
+	contenedor.classList.add(...clasesContenedor.split(" "));
+	for (let i=0; i < nItems ; i++) {
+		let elemento = document.createElement("div");
+		elemento.classList.add(...clasesItem.split(" "));
+		elemento.textContent = "" + i + ".".repeat(longText);
+		contenedor.appendChild(elemento);
+	}
+	document.body.appendChild(contenedor);
+}
+
+function extraerPropiedades(arrayPropiedades,num) {
+	for (dato of arrayPropiedades) {
+		if (! Array.isArray(dato.item) && dato.item == num
+			||	Array.isArray(dato.item) && dato.item.includes(num))
+		return dato
+	}
+
+	return null;
+
+}
+
+
+function generaContainerVariopinto(clasesContenedor, clasesItem,nItems,longText,arrayPropiedades){
+
+	let contenedor = document.createElement("div");
+	contenedor.classList.add(...clasesContenedor.split(" "));
+	for (let i=0; i < nItems ; i++) {
+		let elemento = document.createElement("div");
+		propiedades = extraerPropiedades(arrayPropiedades,i)
+		if (propiedades== null)
+			elemento.classList.add(...clasesItem.split(" "));
+		else
+			elemento.classList.add(...propiedades.clases.split(" "));
+		elemento.textContent = "" + i + ".".repeat(longText);
+		contenedor.appendChild(elemento);
+	}
+	for( dato of arrayPropiedades)
+		console.log(dato);
+	document.body.appendChild(contenedor);
+}
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<h1> TÍTULO </h1>
+<div class="descripcion">justify-content actúa desplazando los items en el main axis si 
+	hay espacio de sobra  </div>
+
+
+<h1> 1. Container base (Sin Flex) </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div class="container" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 2 Contenedor Flex </h1>
+<div class="descripcion"> Empezamos con un contenedor flex, sin más </div>
+
+<script> generaContainer("container container-flex",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+<h1> 3a justify-content: flex-end</h1>
+<div class="descripcion"> Recuerda: justify-content actúa en el main-axis</div>
+
+<script> generaContainer("container container-flex justify-end",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+<h1> 3b justify-content: flex-end flex-direction:row-reverse</h1>
+<div class="descripcion"> Si el main axis es horizontal, pero es "reverse" entonces el final está
+	a la izquierda (que era el principio en flex-direction:row)
+	 </div>
+
+<script> generaContainer("container container-flex justify-end row-reverse",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+<h1> 3bII justify-content: flex-end flex-direction:row-reverse</h1>
+<div class="descripcion"> Igual que el 3b, pero con muchos items y wrap. El aspecto (descontando los números) es normal... pero realmente no es un orden por defecto (row) y el rsultado de combinar flex-end con row-reverse
+	 </div>
+
+<script> generaContainer("container container-flex justify-end row-reverse container-wrap",
+							"item item-ancho",
+							20,
+							6);
+</script>
+
+
+<h1> 4 justify-content: center</h1>
+<div class="descripcion"> </div>
+
+<script> generaContainer("container container-flex justify-center",
+							"item item-ancho",
+							4,
+								);
+</script>
+
+
+<h1> 5a justify-content: space-between</h1>
+<div class="descripcion"> space-between, space-around y space-evenly , 
+	TODOS gestionan el espacio sobrante y lo insertan entre elementos o entre elementos y el borde.
+"space-between" sólo inserta espacio entre elementos, dejando el primer y último elemento pegados al
+borde
+</div>
+
+<script> generaContainer("container container-flex justify-between",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+<h1> 5b justify-content: space-around</h1>
+<div class="descripcion"> reparte el espacio alrededor de los elementos, como si de un margen
+	se tratara.
+</div>
+
+<script> generaContainer("container container-flex justify-around",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+
+<h1> 5c justify-content: space-evenly</h1>
+<div class="descripcion"> reparte el espacio a partes iguales entre elementos y bordes </div>
+
+<script> generaContainer("container container-flex justify-evenly",
+							"item item-ancho",
+							4,
+							6);
+</script>
+
+
+<h1> 6a: flex-justify: center flex-direction: column</h1>
+<div class="descripcion"> contenedor flex-direciton:column donde se logra
+ver elefecto de flex-justify: space-evenly</div>
+
+<script> generaContainer("container container-flex justify-evenly container-direction-column container-alto container-wrap",
+							"item item-ancho",
+							15,
+							6);
+</script>
+
+<h1> 7a: ejemplo de align-content con flex-direction:row y wrap	</h1>
+<div class="descripcion">
+align-content:space-evenly; Provocamos espacio vertical de sobra pero al mismo tiempo ponemos muchos elemnetos. Así hay varias filas pero sobra espacio (en el eje secundario) y vemos cómo se distribuyte
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto align-evenly",
+							"item item-ancho",
+							25,
+							6);
+</script>
+<h1> 7b: ejemplo de align-content con flex-direction:row SIN WRAP	</h1>
+<div class="descripcion">
+Lo anterior sólo funciona sihay wrap. En caso contrario, no va a sobrar espacio vertical A REPARTIR ya que sólo habrá una fila
+</div>
+
+<script> generaContainer("container container-flex container-alto align-evenly",
+							"item item-ancho",
+							25,
+							6);
+</script>
+
+
+<h1> 7c: ejemplo de align-content con flex-direction:row	</h1>
+<div class="descripcion">
+Restauramos flex-wrap:wrap (para activar align-content) y probamos align-content: center
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto align-center",
+							"item item-ancho",
+							25,
+							6);
+</script>
+
+<h1> 8a: container con altura, todo lo demás por defecto (align-content, height de items)	</h1>
+<div class="descripcion">
+Quiero ver qué pasa en el eje secundario si no digo nada. ¿Cuál es el align-content por defecto? Descubro que el align-content por defecto es stretch; Debería haber hecho este Contenedor ANTES que los 7 ya que aquí no interfiere la altura height de los items ;
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto",
+							"item",
+							4,
+							6);
+</script>
+
+<h1> 8b: container con altura, todo lo demás por defecto (align-content, height de items) con muchos items	</h1>
+<div class="descripcion">
+Igual que 8a pero con muchos ítems
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto",
+							"item",
+							24,
+							6);
+</script>
+
+
+<h1> 8c: container con altura, items con anchura (sin altura)	</h1>
+<div class="descripcion">
+Igual que 8b (muchos items) con anchura determinada, pero sin altura establecida, por lo que se aplica align-content:stretch (el valor por defecto)
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto",
+							"item item-solo-ancho",
+							24,
+							6);
+</script>
+
+<h1> 8d: container con altura, items con anchura (sin altura) pero sin wrap	</h1>
+<div class="descripcion">
+Igual que 8c Pero sin wrap. No hacía falta probar mucho éste pero igualmente nos recuerda que sin wrap, se sigue estirando
+</div>
+
+<script> generaContainer("container container-flex container-alto",
+							"item item-solo-ancho",
+							24,
+							6);
+</script>
+
+
+<h1> 9: container con altura, items con anchura (sin altura establecida) y align-content	</h1>
+<div class="descripcion">
+¿Qué pasa si establecemos align-content en items que no estan preocupados por su altura
+</div>
+
+<script> generaContainer("container container-flex container-wrap container-alto align-center",
+							"item item-solo-ancho",
+							24,
+							6);
+</script>
+
+<h1> 10: container con altura y align-content, items con anchura y diferentes alturas	</h1>
+<div class="descripcion">
+
+</div>
+
+<script> generaContainerVariopinto(
+		"container container-flex container-wrap container-alto align-center",
+		"item item-solo-ancho",
+		24,
+		6,
+		[
+		{item:[3,2,8], clases:"item item-ancho"},
+		{item:4, clases:"item item-muy-alto"},
+		{item:6, clases:"item item-ancho"},
+		{item:[0,1], clases:"item item-alto"}
+		]
+		);
+</script>
+
+
+<h1> X: items con texto a diferentes escalas	</h1>
+<div class="descripcion">
+
+</div>
+
+<script> generaContainer("container container-flex container-alto",
+							"item",
+							4,
+							6);
+</script>
+
+</body>

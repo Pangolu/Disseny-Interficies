@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="/Activitats/03_Flex/01_flex_vs_no_flex.css">
+
+<style>
+
+</style>
+
+</head>
+
+<body>
+
+<h1> TÍTULO </h1>
+<div class="descripcion">Esto es una descripción  </div>
+
+
+<h1> 1. Container base (Sin Flex) </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div class="container" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 2. Container base (Sin Flex) items div inline</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-inline ">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inline ">2</div>
+	<div class="item item-inline ">3</div>
+	<div class="item item-inline ">4</div>
+</div>
+
+<h1> 3. Container base sin flex inlineblock</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-inlineblock ">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inlineblock ">2</div>
+	<div class="item item-inlineblock ">3</div>
+	<div class="item item-inlineblock ">4</div>
+</div>
+
+<h1> 4. Container base sin flex</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-ancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-ancho">2</div>
+	<div class="item item-ancho">3</div>
+	<div class="item item-ancho">4</div>
+</div>
+
+<h1> 5. Container base sin flex i</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-inline item-ancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inline item-ancho">2</div>
+	<div class="item item-inline item-ancho">3</div>
+	<div class="item item-inline item-ancho">4</div>
+</div>
+
+<h1> 6. Container base sin flex i</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-inlineblock ">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inlineblock ">2</div>
+	<div class="item item-inlineblock ">3</div>
+	<div class="item item-inlineblock ">4</div>
+</div>
+
+<h1> 7. Container base flex</h1>
+<div class="descripcion"> container flex con items normales sin nada especial</div>
+<div class="container container-flex" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 8. Container base flex</h1>
+<div class="descripcion"> container flex con items normales sin nada especial. mismo contenido que antes pero ahora flex-direction: column</div>
+<div class="container container-flex directionColumn" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 9. Container flex items muy anchos</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los 
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container container-flex " >
+	<div class="item item-muyancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-muyancho">2 contingutperomplir eldivel maximpossible</div>
+	<div class="item item-muyancho">3 contingutperomplireldivel maximpossible</div>
+	<div class="item item-muyancho">4 contingutperomplireldivelmaximpossible</div>
+	<div class="item item-muyancho">5 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">6 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">7 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">8 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">9 contingut per omplir el div el maxim possible</div>
+</div>
+
+<h1> 10. Container flex items muy anchos con wrap</h1>
+<div class="descripcion"> ahora con flex-wrap </div>
+<div class="container container-flex container-wrap" >
+	<div class="item item-muyancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-muyancho">2 contingutperomplir eldivel maximpossible</div>
+	<div class="item item-muyancho">3 contingutperomplireldivel maximpossible</div>
+	<div class="item item-muyancho">4 contingutperomplireldivelmaximpossible</div>
+	<div class="item item-muyancho">5 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">6 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">7 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">8 contingut per omplir el div el maxim possible</div>
+	<div class="item item-muyancho">9 contingut per omplir el div el maxim possible</div>
+</div>
+
+<h1> 11. Container flex items muy anchos con wrap</h1>
+<div class="descripcion"> ahora con flex-wrap items sin width</div>
+<div class="container container-flex container-wrap" >
+	<div class="item">1 (text-align:center; margin:.5em )</div>
+	<div class="item">2 contingutperomplir eldivel maximpossible</div>
+	<div class="item">3 contingutperomplireldivel maximpossible</div>
+	<div class="item">4 contingutperomplireldivelmaximpossible</div>
+	<div class="item">5 contingut per omplir el div el maxim possible</div>
+	<div class="item">6 contingut per omplir el div el maxim possible</div>
+	<div class="item">7 contingut per omplir el div el maxim possible</div>
+	<div class="item">8 contingut per omplir el div el maxim possible</div>
+	<div class="item">9 contingut per omplir el div el maxim possible</div>
+</div>
+
+<h1> 12. Container flex column con wrap</h1>
+<div class="descripcion"> flex-direction column</div>
+<div class="container container-flex directionColumn container-wrap" >
+	<div class="item">1 (text-align:center; margin:.5em )</div>
+	<div class="item">2 contingutperomplir eldivel maximpossible</div>
+	<div class="item">3 contingutperomplireldivel maximpossible</div>
+	<div class="item">4 contingutperomplireldivelmaximpossible</div>
+	<div class="item">5 contingut per omplir el div el maxim possible</div>
+	<div class="item">6 contingut per omplir el div el maxim possible</div>
+	<div class="item">7 contingut per omplir el div el maxim possible</div>
+	<div class="item">8 contingut per omplir el div el maxim possible</div>
+	<div class="item">9 contingut per omplir el div el maxim possible</div>
+</div>
+
+<h1> 13. Container flex column sin wrap</h1>
+<div class="descripcion"> flex-direction column no-wrap</div>
+<div class="container container-flex directionColumn" >
+	<div class="item">1 (text-align:center; margin:.5em )</div>
+	<div class="item">2 contingutperomplir eldivel maximpossible</div>
+	<div class="item">3 contingutperomplireldivel maximpossible</div>
+	<div class="item">4 contingutperomplireldivelmaximpossible</div>
+	<div class="item">5 contingut per omplir el div el maxim possible</div>
+	<div class="item">6 contingut per omplir el div el maxim possible</div>
+	<div class="item">7 contingut per omplir el div el maxim possible</div>
+	<div class="item">8 contingut per omplir el div el maxim possible</div>
+	<div class="item">9 contingut per omplir el div el maxim possible</div>
+</div>
+
+</body>

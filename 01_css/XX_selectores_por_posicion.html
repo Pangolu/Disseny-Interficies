@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="./XX_selectores_por_posicion_ENTREGABLE.css">
+
+
+</head>
+<body>
+<div class="minicontenedor" id="uno">
+	<span class="elem"> 1 </span>
+	<span class="elem"> 2 </span>
+	<span class="elem"> 3 </span>
+	<span class="elem"> 4 </span>
+
+</div>
+
+<div class="contenedor" id="dos"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem"> 3 </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>
+</div>
+
+<div class="contenedor" id="tres"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem" id="special"> 3 
+		<span>3.1</span>
+		<span>3.2</span>
+		<span>3,3</span>
+		<span>3.4</span>
+		<div>
+			<span>3.5.1</span>
+			<span>3.5.2</span>
+			<span>3.5.3</span>
+		</div>
+		<span>span 3.6
+			<div style="display: inline;">3.6.1</div>
+			<div style="display: inline;">3.6.2</div>
+		</span>
+		<span></span>
+		<span></span>
+		<span></span>
+		
+		<span></span>
+		<span></span>  </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>	
+</div>
+
+<div class="contenedor" id="cuatro"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem"> 3 </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>
+ 	<span class="elem"> 8 </span>
+	<span class="elem"> 9 </span>
+	<span class="elem"> 10 </span>	
+</div>
+
+<div class="supercontenedor" id="sinco"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem"> 3 </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>
+ 	<span class="elem"> 8 </span>
+	<span class="elem"> 9 </span>
+	<span class="elem"> 10 </span>	
+	<span class="elem"> 11 </span>
+ 	<span class="elem"> 12 </span>
+ 	<span class="elem"> 13 </span>
+	<span class="elem"> 14 </span>
+	<span class="elem"> 15 </span>
+	<span class="elem"> 16 </span>	
+</div>
+
+<div class="supercontenedor" id="sei"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem"> 3 </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>
+ 	<span class="elem"> 8 </span>
+	<span class="elem"> 9 </span>
+	<span class="elem"> 10 </span>	
+	<span class="elem"> 11 </span>
+ 	<span class="elem"> 12 </span>
+ 	<span class="elem"> 13 </span>
+	<span class="elem"> 14 </span>
+	<span class="elem"> 15 </span>
+	<span class="elem"> 16 </span>	
+</div>
+
+<div class="supercontenedor" id="ciete"> 
+ 	<span class="elem"> 1 </span>
+ 	<span class="elem"> 2 </span>
+ 	<span class="elem"> 3 </span>
+ 	<span class="elem"> 4 </span>
+ 	<span class="elem"> 5 </span>
+ 	<span class="elem"> 6 </span>
+ 	<span class="elem"> 7 </span>
+ 	<span class="elem"> 8 </span>
+	<span class="elem"> 9 </span>
+	<span class="elem"> 10 </span>	
+	<span class="elem"> 11 </span>
+ 	<span class="elem"> 12 </span>
+ 	<span class="elem"> 13 </span>
+	<span class="elem"> 14 </span>
+	<span class="elem"> 15 </span>
+	<span class="elem"> 16 </span>	
+</div>
+
+<div class="supercontenedor" id="ocho"> 
+	<span class="elem"> 1 </span>
+	<span class="elem"> 2 </span>
+	<span class="elem"> 3 </span>
+	<span class="elem"> 4 </span>
+	<span class="elem"> 5 </span>
+	<span class="elem"> 6 </span>
+	<span class="elem"> 7 </span>
+	<span class="elem"> 8 </span>
+   <span class="elem"> 9 </span>
+   <span class="elem"> 10 </span>	
+   <span class="elem"> 11 </span>
+	<span class="elem"> 12 </span>
+	<span class="elem"> 13 </span>
+   <span class="elem"> 14 </span>
+   <span class="elem"> 15 </span>
+   <span class="elem"> 16 </span>	
+</div>
+
+<div class="ultracontenedor" id="nueve"> 
+	<script type="text/javascript" >
+		num = 25;
+		console.log("Executing this javascript");
+		var contenedor = document.getElementById("nueve");
+		/*dado que este script es el primer hijo del nodo "nueve",
+		vamos a hacer prepend desde el último hasta el primero 
+		(en orden inverso, por tanto) para que el priemr hijo
+		ya no sea el script y no estorbe a la hora de seleccionar
+		por posicion en el resto de elementos. De otra forma
+		el script sería el primer elemento (invisible)y el primero
+		visible ya sería el segundo hijo de contenedor, 
+		fastidiando el ejercicio*/
+		for (var i = num; i > 0; i--) {
+			spanElement = document.createElement("span");
+			spanElement.classList.add("elem");
+			spanElement.innerHTML = "" + i;
+
+			contenedor.prepend(spanElement);
+		}
+		/* lo siguiente es opioncal e intenta eliminar
+		el siguiente elemento como hijo del contenedor, así
+		no "juega" con los selectores de posición*/
+		//contenedor.removeChild(contenedor.lastChild);
+
+	</script>
+
+</div>
+
+<div> </div>
+<div class="ultracontenedor" id="dies"> 
+	<script type="text/javascript" >
+		num = 25;
+		console.log("Executing this javascript");
+		var contenedor = document.getElementById("dies");
+		/*dado que este script es el primer hijo del nodo "nueve",
+		vamos a hacer prepend desde el último hasta el primero 
+		(en orden inverso, por tanto) para que el priemr hijo
+		ya no sea el script y no estorbe a la hora de seleccionar
+		por posicion en el resto de elementos. De otra forma
+		el script sería el primer elemento (invisible)y el primero
+		visible ya sería el segundo hijo de contenedor, 
+		fastidiando el ejercicio*/
+		for (var i = num; i > 0; i--) {
+			spanElement = document.createElement("span");
+			spanElement.classList.add("elem");
+			spanElement.innerHTML = "" + i;
+
+			contenedor.prepend(spanElement);
+		}
+		/* lo siguiente es opioncal e intenta eliminar
+		el siguiente elemento como hijo del contenedor, así
+		no "juega" con los selectores de posición*/
+		//contenedor.removeChild(contenedor.lastChild);
+
+	</script>
+
+</div>
+
+<div class="separador"> IMPORTANTE. AÑADIR PARA EJERCICIOS FIRTS-OF-TYPE y demá<br>
+	:not(body):not(html):first-of-type ... tambien ejercicios
+</div>
+<div>Añadir también la palabra even y añadir descripciones eme </div>
+
+
+
+</body>

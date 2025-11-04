@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="02_flex_direction.css">
+
+<style>
+
+</style>
+
+<script>
+  function generarContainerConItems(classeContenedor, classeItem, nItems, longText) {
+    // Crear el contenedor principal
+    const contenedor = document.createElement("div");
+    contenedor.classList.add(...classeContenedor.split(" "));
+
+    // Crear los items dentro
+    for (let i = 0; i < nItems; i++) {
+      const elemento = document.createElement("div");
+      elemento.classList.add(...classeItem.split(" "));
+      elemento.textContent = `Item ${i + 1} — ${"X".repeat(longText)}`;
+      contenedor.append(elemento);
+    }
+
+    // Devolver el contenedor listo
+    return contenedor;
+  }
+
+</script>
+
+</head>
+
+<body>
+
+<h1> TÍTULO </h1>
+<div class="descripcion">Esto es una descripción  </div>
+
+
+<h1> 1. Container base (Sin Flex) </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div class="container" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 2. Container flex normal </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div class="container container-flex" >
+	<div class="item item-ancho ">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-ancho ">2</div>
+	<div class="item item-ancho ">3</div>
+	<div class="item item-ancho ">4</div>
+	<div class="item item-ancho ">5</div>
+	<div class="item item-ancho ">6</div>
+	<div class="item item-ancho ">7</div>
+	<div class="item item-ancho ">8</div>
+	<div class="item item-ancho ">9</div>
+</div>
+
+<h1> 3. Container flex row-reverser </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div class="container container-flex row-reverse" >
+	<div class="item item-ancho ">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-ancho ">2</div>
+	<div class="item item-ancho ">3</div>
+	<div class="item item-ancho ">4</div>
+	<div class="item item-ancho ">5</div>
+	<div class="item item-ancho ">6</div>
+	<div class="item item-ancho ">7</div>
+	<div class="item item-ancho ">8</div>
+	<div class="item item-ancho ">9</div>
+	<div class="item item-ancho ">10</div>
+	<div class="item item-ancho ">11</div>
+	<div class="item item-ancho ">12</div>
+	<div class="item item-ancho ">13</div>
+	<div class="item item-ancho ">14</div>
+	<div class="item item-ancho ">15</div>
+</div>
+
+<h1> 4. Container flex con muchos items</h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div id="zona4"></div>
+
+<script>
+  // Insertamos el contenedor generado dentro de #zona4
+  const zona4 = document.getElementById("zona4");
+  zona4.append(
+    generarContainerConItems("container container-flex row-reverse", "item item-ancho", 10, 5)
+  );
+</script>
+
+<h1> 5. Container flex row-reverser wrap</h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div id="zona5"></div>
+
+<script>
+  // Insertamos el contenedor generado dentro de #zona4
+  const zona5 = document.getElementById("zona5");
+  zona5.append(
+    generarContainerConItems("container container-flex row-reverse", "item item-ancho", 10, 5)
+  );
+</script>
+
+<h1> 6. Container flex row-reverser wrap</h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div id="zona6"></div>
+
+<script>
+  // Insertamos el contenedor generado dentro de #zona4
+  const zona6 = document.getElementById("zona6");
+  zona6.append(
+    generarContainerConItems("container container-flex row-reverse", "item item-ancho", 10, 5)
+  );
+</script>
+
+<h1> 7. Container flex row-reverser wrap</h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div id="zona7"></div>
+
+<script>
+  // Insertamos el contenedor generado dentro de #zona4
+  const zona7 = document.getElementById("zona7");
+  zona7.append(
+    generarContainerConItems("container container-flex row-reverse", "item item-ancho", 10, 5)
+  );
+</script>
+
+<h1> 8. Container flex row-reverser wrap</h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene  </div>
+<div id="zona8"></div>
+
+<script>
+  // Insertamos el contenedor generado dentro de #zona4
+  const zona8 = document.getElementById("zona8");
+  zona8.append(
+    generarContainerConItems("container container-flex row-reverse", "item item-ancho", 10, 5)
+  );
+</script>
+</body>
