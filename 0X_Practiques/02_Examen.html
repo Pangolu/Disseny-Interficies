@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Interactivos: Estilos y Movimiento</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f1f3f9;
+            border-radius: 10px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .reset-btn {
+            background: var(--accent-color);
+        }
+        
+        select, input {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .demo-area {
+            min-height: 200px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            background: #f8fafc;
+        }
+        
+        .demo-element {
+            padding: 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-element:hover {
+            transform: scale(1.05);
+        }
+        
+        .draggable-container {
+            min-height: 300px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            background: #f8fafc;
+        }
+        
+        .draggable-item {
+            padding: 15px 20px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 8px;
+            cursor: move;
+            user-select: none;
+            position: absolute;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        
+        .draggable-item:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .draggable-item.dragging {
+            opacity: 0.8;
+            z-index: 1000;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .property-display {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 2px solid #cbd5e0;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            button, select, input {
+                width: 100%;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ejercicios Interactivos: Cambio de Estilos y Movimiento</h1>
+            <p>Practica manipulando elementos con CSS y JavaScript</p>
+        </header>
+        
+        <!-- Sección 1: Cambio de color -->
+        <section class="section">
+            <h2>1. Cambiar Color de un Elemento</h2>
+            <p>Selecciona un color y aplica cambios al elemento de demostración.</p>
+            
+            <div class="controls">
+                <input type="color" id="colorPicker" value="#4361ee">
+                <button id="applyColor">Aplicar Color</button>
+                <button id="randomColor">Color Aleatorio</button>
+                <button id="resetColor" class="reset-btn">Restablecer Color</button>
+            </div>
+            
+            <div class="property-display">
+                Color actual: <span class="color-preview" id="colorPreview"></span>
+                <span id="currentColor">#4361ee</span>
+            </div>
+            
+            <div class="demo-area">
+                <div id="colorDemo" class="demo-element">
+                    Este es un elemento de demostración
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre>
+// Cambiar color con JavaScript
+const element = document.getElementById('colorDemo');
+element.style.backgroundColor = nuevoColor;
+
+// Obtener color actual
+const currentColor = element.style.backgroundColor;
+                </pre>
+            </div>
+        </section>
+        
+        <!-- Sección 2: Cambiar tamaño de letra -->
+        <section class="section">
+            <h2>2. Cambiar Tamaño de Fuente</h2>
+            <p>Ajusta el tamaño de la fuente usando el control deslizante.</p>
+            
+            <div class="controls">
+                <input type="range" id="fontSize" min="10" max="50" value="16">
+                <span id="fontSizeValue">16px</span>
+                <button id="applyFontSize">Aplicar Tamaño</button>
+                <button id="resetFontSize" class="reset-btn">Tamaño Por Defecto</button>
+            </div>
+            
+            <div class="property-display">
+                Tamaño actual: <span id="currentFontSize">16px</span>
+            </div>
+            
+            <div class="demo-area">
+                <div id="fontDemo" class="demo-element">
+                    Este texto cambiará de tamaño
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre>
+// Cambiar tamaño de fuente
+const element = document.getElementById('fontDemo');
+element.style.fontSize = nuevoTamaño + 'px';
+
+// Obtener tamaño actual
+const currentSize = window.getComputedStyle(element).fontSize;
+                </pre>
+            </div>
+        </section>
+        
+        <!-- Sección 3: Mover elementos arrastrando -->
+        <section class="section">
+            <h2>3. Mover Elementos Arrastrando</h2>
+            <p>Arrastra los elementos y suéltalos en cualquier posición dentro del contenedor.</p>
+            
+            <div class="controls">
+                <button id="addDraggable">Añadir Elemento</button>
+                <button id="removeDraggable">Eliminar Elemento</button>
+                <button id="resetPositions" class="reset-btn">Posiciones Originales</button>
+            </div>
+            
+            <div class="draggable-container" id="dragContainer">
+                <div class="draggable-item" style="top: 20px; left: 20px;">Elemento 1</div>
+                <div class="draggable-item" style="top: 20px; left: 150px;">Elemento 2</div>
+                <div class="draggable-item" style="top: 20px; left: 280px;">Elemento 3</div>
+            </div>
+            
+            <div class="code-example">
+                <pre>
+// Implementación de arrastrar y soltar
+element.addEventListener('mousedown', iniciarArrastre);
+
+function iniciarArrastre(e) {
+    // Calcular desplazamiento del mouse
+    offsetX = e.clientX - element.getBoundingClientRect().left;
+    offsetY = e.clientY - element.getBoundingClientRect().top;
+    
+    // Mover elemento durante el arrastre
+    document.addEventListener('mousemove', moverElemento);
+    document.addEventListener('mouseup', soltarElemento);
+}
+
+function moverElemento(e) {
+    // Calcular nueva posición
+    const x = e.clientX - offsetX - container.getBoundingClientRect().left;
+    const y = e.clientY - offsetY - container.getBoundingClientRect().top;
+    
+    // Aplicar nueva posición
+    element.style.left = x + 'px';
+    element.style.top = y + 'px';
+}
+                </pre>
+            </div>
+        </section>
+        
+        <!-- Sección 4: Cambios múltiples -->
+        <section class="section">
+            <h2>4. Múltiples Cambios de Estilo</h2>
+            <p>Combina diferentes propiedades CSS para personalizar completamente el elemento.</p>
+            
+            <div class="grid">
+                <div>
+                    <h3>Color de Fondo</h3>
+                    <input type="color" id="multiBgColor" value="#4361ee">
+                </div>
+                
+                <div>
+                    <h3>Color de Texto</h3>
+                    <input type="color" id="multiTextColor" value="#ffffff">
+                </div>
+                
+                <div>
+                    <h3>Tamaño de Fuente</h3>
+                    <input type="range" id="multiFontSize" min="10" max="50" value="16">
+                    <span id="multiFontSizeValue">16px</span>
+                </div>
+                
+                <div>
+                    <h3>Border Radius</h3>
+                    <input type="range" id="multiBorderRadius" min="0" max="50" value="8">
+                    <span id="multiBorderRadiusValue">8px</span>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="applyAll">Aplicar Todos los Cambios</button>
+                <button id="resetAll" class="reset-btn">Restablecer Todo</button>
+            </div>
+            
+            <div class="demo-area">
+                <div id="multiDemo" class="demo-element">
+                    Elemento completamente personalizable
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre>
+// Aplicar múltiples estilos
+element.style.backgroundColor = bgColor;
+element.style.color = textColor;
+element.style.fontSize = fontSize + 'px';
+element.style.borderRadius = borderRadius + 'px';
+
+// Restablecer todos los estilos
+element.removeAttribute('style');
+                </pre>
+            </div>
+        </section>
+        
+        <!-- Sección 5: Animaciones CSS -->
+        <section class="section">
+            <h2>5. Animaciones CSS con JavaScript</h2>
+            <p>Aplica diferentes animaciones CSS mediante JavaScript.</p>
+            
+            <div class="controls">
+                <select id="animationType">
+                    <option value="">Selecciona una animación</option>
+                    <option value="pulse">Pulso</option>
+                    <option value="bounce">Rebote</option>
+                    <option value="rotate">Rotación</option>
+                    <option value="fade">Desvanecimiento</option>
+                </select>
+                <button id="applyAnimation">Aplicar Animación</button>
+                <button id="removeAnimation">Quitar Animación</button>
+            </div>
+            
+            <div class="demo-area">
+                <div id="animationDemo" class="demo-element">
+                    Elemento animado
+                </div>
+            </div>
+            
+            <div class="code-example">
+                <pre>
+// Aplicar animación CSS
+element.style.animation = 'pulse 2s infinite';
+
+// Definir animaciones en CSS
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+// Remover animación
+element.style.animation = 'none';
+                </pre>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ===== SECCIÓN 1: CAMBIO DE COLOR =====
+        const colorDemo = document.getElementById('colorDemo');
+        const colorPicker = document.getElementById('colorPicker');
+        const applyColorBtn = document.getElementById('applyColor');
+        const randomColorBtn = document.getElementById('randomColor');
+        const resetColorBtn = document.getElementById('resetColor');
+        const colorPreview = document.getElementById('colorPreview');
+        const currentColor = document.getElementById('currentColor');
+        
+        // Aplicar color seleccionado
+        applyColorBtn.addEventListener('click', () => {
+            colorDemo.style.backgroundColor = colorPicker.value;
+            updateColorDisplay();
+        });
+        
+        // Generar color aleatorio
+        randomColorBtn.addEventListener('click', () => {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            colorPicker.value = randomColor;
+            colorDemo.style.backgroundColor = randomColor;
+            updateColorDisplay();
+        });
+        
+        // Restablecer color
+        resetColorBtn.addEventListener('click', () => {
+            colorDemo.style.backgroundColor = '';
+            colorPicker.value = '#4361ee';
+            updateColorDisplay();
+        });
+        
+        // Actualizar visualización del color
+        function updateColorDisplay() {
+            const computedColor = window.getComputedStyle(colorDemo).backgroundColor;
+            colorPreview.style.backgroundColor = computedColor;
+            currentColor.textContent = computedColor;
+        }
+        
+        // Inicializar visualización
+        updateColorDisplay();
+        
+        // ===== SECCIÓN 2: TAMAÑO DE FUENTE =====
+        const fontDemo = document.getElementById('fontDemo');
+        const fontSize = document.getElementById('fontSize');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+        const applyFontSizeBtn = document.getElementById('applyFontSize');
+        const resetFontSizeBtn = document.getElementById('resetFontSize');
+        const currentFontSize = document.getElementById('currentFontSize');
+        
+        // Actualizar valor mostrado
+        fontSize.addEventListener('input', () => {
+            fontSizeValue.textContent = fontSize.value + 'px';
+        });
+        
+        // Aplicar tamaño de fuente
+        applyFontSizeBtn.addEventListener('click', () => {
+            fontDemo.style.fontSize = fontSize.value + 'px';
+            updateFontSizeDisplay();
+        });
+        
+        // Restablecer tamaño de fuente
+        resetFontSizeBtn.addEventListener('click', () => {
+            fontDemo.style.fontSize = '';
+            fontSize.value = 16;
+            fontSizeValue.textContent = '16px';
+            updateFontSizeDisplay();
+        });
+        
+        // Actualizar visualización del tamaño
+        function updateFontSizeDisplay() {
+            const computedSize = window.getComputedStyle(fontDemo).fontSize;
+            currentFontSize.textContent = computedSize;
+        }
+        
+        // Inicializar visualización
+        updateFontSizeDisplay();
+        
+        // ===== SECCIÓN 3: ARRASTRAR ELEMENTOS =====
+        const dragContainer = document.getElementById('dragContainer');
+        const addDraggableBtn = document.getElementById('addDraggable');
+        const removeDraggableBtn = document.getElementById('removeDraggable');
+        const resetPositionsBtn = document.getElementById('resetPositions');
+        
+        // Inicializar elementos arrastrables
+        function initDraggableItems() {
+            const draggableItems = document.querySelectorAll('.draggable-item');
+            
+            draggableItems.forEach(item => {
+                item.addEventListener('mousedown', startDrag);
+            });
+        }
+        
+        // Variables para el arrastre
+        let draggedItem = null;
+        let offsetX, offsetY;
+        let initialPositions = [];
+        
+        // Guardar posiciones iniciales
+        function saveInitialPositions() {
+            initialPositions = [];
+            const items = document.querySelectorAll('.draggable-item');
+            items.forEach(item => {
+                initialPositions.push({
+                    element: item,
+                    top: item.style.top,
+                    left: item.style.left
+                });
+            });
+        }
+        
+        // Iniciar arrastre
+        function startDrag(e) {
+            draggedItem = e.target;
+            offsetX = e.clientX - draggedItem.getBoundingClientRect().left;
+            offsetY = e.clientY - draggedItem.getBoundingClientRect().top;
+            
+            draggedItem.classList.add('dragging');
+            
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', stopDrag);
+        }
+        
+        // Durante el arrastre
+        function onDrag(e) {
+            if (!draggedItem) return;
+            
+            const containerRect = dragContainer.getBoundingClientRect();
+            const x = e.clientX - offsetX - containerRect.left;
+            const y = e.clientY - offsetY - containerRect.top;
+            
+            // Limitar movimiento dentro del contenedor
+            const maxX = containerRect.width - draggedItem.offsetWidth;
+            const maxY = containerRect.height - draggedItem.offsetHeight;
+            
+            draggedItem.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
+            draggedItem.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+        }
+        
+        // Detener arrastre
+        function stopDrag() {
+            if (draggedItem) {
+                draggedItem.classList.remove('dragging');
+                draggedItem = null;
+            }
+            
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+        
+        // Añadir elemento arrastrable
+        addDraggableBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.draggable-item');
+            const newItem = document.createElement('div');
+            newItem.className = 'draggable-item';
+            newItem.textContent = `Elemento ${items.length + 1}`;
+            
+            // Posición aleatoria dentro del contenedor
+            const containerRect = dragContainer.getBoundingClientRect();
+            const maxX = containerRect.width - 120;
+            const maxY = containerRect.height - 50;
+            
+            newItem.style.top = Math.floor(Math.random() * maxY) + 'px';
+            newItem.style.left = Math.floor(Math.random() * maxX) + 'px';
+            
+            dragContainer.appendChild(newItem);
+            newItem.addEventListener('mousedown', startDrag);
+            saveInitialPositions();
+        });
+        
+        // Eliminar elemento arrastrable
+        removeDraggableBtn.addEventListener('click', () => {
+            const items = document.querySelectorAll('.draggable-item');
+            if (items.length > 1) {
+                dragContainer.removeChild(items[items.length - 1]);
+                saveInitialPositions();
+            }
+        });
+        
+        // Restablecer posiciones
+        resetPositionsBtn.addEventListener('click', () => {
+            initialPositions.forEach(pos => {
+                pos.element.style.top = pos.top;
+                pos.element.style.left = pos.left;
+            });
+        });
+        
+        // Inicializar
+        initDraggableItems();
+        saveInitialPositions();
+        
+        // ===== SECCIÓN 4: MÚLTIPLES CAMBIOS =====
+        const multiDemo = document.getElementById('multiDemo');
+        const multiBgColor = document.getElementById('multiBgColor');
+        const multiTextColor = document.getElementById('multiTextColor');
+        const multiFontSize = document.getElementById('multiFontSize');
+        const multiFontSizeValue = document.getElementById('multiFontSizeValue');
+        const multiBorderRadius = document.getElementById('multiBorderRadius');
+        const multiBorderRadiusValue = document.getElementById('multiBorderRadiusValue');
+        const applyAllBtn = document.getElementById('applyAll');
+        const resetAllBtn = document.getElementById('resetAll');
+        
+        // Actualizar valores mostrados
+        multiFontSize.addEventListener('input', () => {
+            multiFontSizeValue.textContent = multiFontSize.value + 'px';
+        });
+        
+        multiBorderRadius.addEventListener('input', () => {
+            multiBorderRadiusValue.textContent = multiBorderRadius.value + 'px';
+        });
+        
+        // Aplicar todos los cambios
+        applyAllBtn.addEventListener('click', () => {
+            multiDemo.style.backgroundColor = multiBgColor.value;
+            multiDemo.style.color = multiTextColor.value;
+            multiDemo.style.fontSize = multiFontSize.value + 'px';
+            multiDemo.style.borderRadius = multiBorderRadius.value + 'px';
+        });
+        
+        // Restablecer todos los cambios
+        resetAllBtn.addEventListener('click', () => {
+            multiDemo.removeAttribute('style');
+            multiBgColor.value = '#4361ee';
+            multiTextColor.value = '#ffffff';
+            multiFontSize.value = 16;
+            multiFontSizeValue.textContent = '16px';
+            multiBorderRadius.value = 8;
+            multiBorderRadiusValue.textContent = '8px';
+        });
+        
+        // ===== SECCIÓN 5: ANIMACIONES =====
+        const animationDemo = document.getElementById('animationDemo');
+        const animationType = document.getElementById('animationType');
+        const applyAnimationBtn = document.getElementById('applyAnimation');
+        const removeAnimationBtn = document.getElementById('removeAnimation');
+        
+        // Aplicar animación
+        applyAnimationBtn.addEventListener('click', () => {
+            if (animationType.value) {
+                // Remover cualquier animación previa
+                animationDemo.style.animation = 'none';
+                
+                // Forzar reflow para reiniciar la animación
+                void animationDemo.offsetWidth;
+                
+                // Aplicar nueva animación
+                switch(animationType.value) {
+                    case 'pulse':
+                        animationDemo.style.animation = 'pulse 2s infinite';
+                        break;
+                    case 'bounce':
+                        animationDemo.style.animation = 'bounce 1s infinite';
+                        break;
+                    case 'rotate':
+                        animationDemo.style.animation = 'rotate 3s linear infinite';
+                        break;
+                    case 'fade':
+                        animationDemo.style.animation = 'fade 2s ease-in-out infinite';
+                        break;
+                }
+            }
+        });
+        
+        // Quitar animación
+        removeAnimationBtn.addEventListener('click', () => {
+            animationDemo.style.animation = 'none';
+        });
+        
+        // Añadir estilos de animación dinámicamente
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+            
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-20px); }
+            }
+            
+            @keyframes rotate {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            
+            @keyframes fade {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

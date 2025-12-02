@@ -1,0 +1,48 @@
+body{
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}
+
+.item{
+	border:1px solid gray;
+	margin:2px;
+}
+
+.descripcion {
+	align-self:stretch;
+
+	margin-left:10em ;
+	margin-right: 10em;
+	margin-top:3em;
+	margin-bottom:1em;
+
+	border:1px dashed grey;
+	font-family: monospace;
+	font-size: large;
+	
+}
+
+.grid-sin-template{
+	display:grid;
+	border:1px dashed red;
+
+}
+
+
+.grid-basico {
+	display:grid;
+	/* com vull la tabla */
+	grid-template-columns: auto auto auto;
+
+}
+
+.grid-3filas-3columnas{
+	display:grid;
+	border:1px dashed green;
+	grid-template-columns:auto auto auto;
+	grid-template-rows:30px 50px 70px;
+
+}
+
+

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Práctica CSS Flexbox y JavaScript</title>
+    <style>
+      :root {
+        --primary-color: #4a6fa5;
+        --secondary-color: #6b8cbc;
+        --accent-color: #ff6b6b;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --success-color: #51cf66;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: var(--dark-color);
+        line-height: 1.6;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-bottom: 15px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section {
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .flex-container {
+        display: flex;
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        min-height: 150px;
+      }
+
+      .flex-item {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 20px;
+        margin: 5px;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: var(--secondary-color);
+      }
+
+      select,
+      input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .code-example {
+        background-color: #2d3748;
+        color: #e2e8f0;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+        overflow-x: auto;
+        font-family: "Courier New", monospace;
+      }
+
+      .explanation {
+        background-color: #edf2f7;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+
+      .form-example {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 500px;
+        margin: 20px 0;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .draggable-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .draggable-item {
+        padding: 15px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 5px;
+        cursor: move;
+        user-select: none;
+      }
+
+      .drop-zone {
+        min-height: 100px;
+        border: 2px dashed #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 20px 0;
+        transition: all 0.3s;
+      }
+
+      .drop-zone.active {
+        border-color: var(--primary-color);
+        background-color: rgba(74, 111, 165, 0.1);
+      }
+
+      .node-tree {
+        background-color: #f1f3f4;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: monospace;
+      }
+
+      .highlight {
+        background-color: #fff3cd;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+
+      @media (max-width: 768px) {
+        .controls {
+          flex-direction: column;
+        }
+
+        button,
+        select,
+        input {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Práctica de CSS Flexbox y JavaScript</h1>
+        <p>Ejercicios interactivos para preparar tu examen</p>
+      </header>
+
+      <!-- Sección 1: Fundamentos de Flexbox -->
+      <section class="section">
+        <h2>1. Fundamentos de CSS Flexbox</h2>
+        <p>
+          Flexbox es un modelo de layout unidimensional para diseñar elementos
+          en fila o columna.
+        </p>
+
+        <div class="explanation">
+          <h3>Propiedades principales del contenedor flex:</h3>
+          <ul>
+            <li>
+              <strong>display: flex</strong> - Define el contenedor como flex
+            </li>
+            <li>
+              <strong>flex-direction</strong> - Establece la dirección principal
+              (row, column, row-reverse, column-reverse)
+            </li>
+            <li>
+              <strong>justify-content</strong> - Alinea elementos en el eje
+              principal (flex-start, center, flex-end, space-between,
+              space-around, space-evenly)
+            </li>
+            <li>
+              <strong>align-items</strong> - Alinea elementos en el eje
+              transversal (stretch, flex-start, center, flex-end, baseline)
+            </li>
+            <li>
+              <strong>flex-wrap</strong> - Controla si los elementos deben
+              envolverse (nowrap, wrap, wrap-reverse)
+            </li>
+          </ul>
+        </div>
+
+        <h3>Ejemplo interactivo de Flexbox:</h3>
+        <div class="controls">
+          <select id="flexDirection">
+            <option value="row">flex-direction: row</option>
+            <option value="column">flex-direction: column</option>
+            <option value="row-reverse">flex-direction: row-reverse</option>
+            <option value="column-reverse">
+              flex-direction: column-reverse
+            </option>
+          </select>
+
+          <select id="justifyContent">
+            <option value="flex-start">justify-content: flex-start</option>
+            <option value="center">justify-content: center</option>
+            <option value="flex-end">justify-content: flex-end</option>
+            <option value="space-between">
+              justify-content: space-between
+            </option>
+            <option value="space-around">justify-content: space-around</option>
+            <option value="space-evenly">justify-content: space-evenly</option>
+          </select>
+
+          <select id="alignItems">
+            <option value="stretch">align-items: stretch</option>
+            <option value="flex-start">align-items: flex-start</option>
+            <option value="center">align-items: center</option>
+            <option value="flex-end">align-items: flex-end</option>
+            <option value="baseline">align-items: baseline</option>
+          </select>
+
+          <button id="addItem">Añadir elemento</button>
+          <button id="removeItem">Eliminar elemento</button>
+        </div>
+
+        <div id="flexDemo" class="flex-container">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+
+        <div class="code-example">
+          <pre id="cssCode">
+/* Código CSS actual */
+#flexDemo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}</pre
+          >
+        </div>
+      </section>
+
+      <!-- Sección 2: Manipulación del DOM con JavaScript -->
+      <section class="section">
+        <h2>2. Manipulación del DOM con JavaScript</h2>
+        <p>
+          JavaScript nos permite seleccionar, crear, modificar y eliminar
+          elementos del DOM.
+        </p>
+
+        <div class="explanation">
+          <h3>Métodos comunes de selección:</h3>
+          <ul>
+            <li>
+              <strong>document.getElementById()</strong> - Selecciona por ID
+            </li>
+            <li>
+              <strong>document.querySelector()</strong> - Selecciona el primer
+              elemento que coincide con el selector CSS
+            </li>
+            <li>
+              <strong>document.querySelectorAll()</strong> - Selecciona todos
+              los elementos que coinciden con el selector CSS
+            </li>
+            <li>
+              <strong>document.getElementsByClassName()</strong> - Selecciona
+              por clase
+            </li>
+            <li>
+              <strong>document.getElementsByTagName()</strong> - Selecciona por
+              etiqueta
+            </li>
+          </ul>
+        </div>
+
+        <h3>Ejemplo: Selección y modificación de elementos</h3>
+        <div class="controls">
+          <button id="selectItems">Seleccionar elementos flex</button>
+          <button id="changeColor">Cambiar color de elementos</button>
+          <button id="resetColor">Restablecer colores</button>
+          <button id="showTree">Mostrar árbol de nodos</button>
+        </div>
+
+        <div id="nodeTree" class="node-tree" style="display: none">
+          <!-- Aquí se mostrará el árbol de nodos -->
+        </div>
+      </section>
+
+      <!-- Sección 3: Movimiento de elementos -->
+      <section class="section">
+        <h2>3. Movimiento de elementos por la pantalla</h2>
+        <p>
+          Podemos mover elementos cambiando sus estilos CSS mediante JavaScript.
+        </p>
+
+        <h3>Ejemplo: Arrastrar y soltar elementos</h3>
+        <div class="draggable-container">
+          <div class="draggable-item" draggable="true">Elemento 1</div>
+          <div class="draggable-item" draggable="true">Elemento 2</div>
+          <div class="draggable-item" draggable="true">Elemento 3</div>
+        </div>
+
+        <div class="drop-zone" id="dropZone">Suelta los elementos aquí</div>
+
+        <div class="code-example">
+          <pre>
+// Código para arrastrar y soltar
+document.querySelectorAll('.draggable-item').forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', e.target.textContent);
+        e.target.classList.add('dragging');
+    });
+    
+    item.addEventListener('dragend', (e) => {
+        e.target.classList.remove('dragging');
+    });
+});
+
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('active');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('active');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData('text/plain');
+    const newElement = document.createElement('div');
+    newElement.className = 'draggable-item';
+    newElement.textContent = data;
+    newElement.draggable = true;
+    dropZone.appendChild(newElement);
+    dropZone.classList.remove('active');
+});
+                </pre
+          >
+        </div>
+      </section>
+
+      <!-- Sección 4: Formularios interactivos -->
+      <section class="section">
+        <h2>4. Formularios y validación con JavaScript</h2>
+        <p>
+          Los formularios son elementos esenciales en las aplicaciones web.
+          Podemos validarlos y manipularlos con JavaScript.
+        </p>
+
+        <h3>Ejemplo: Formulario de registro</h3>
+        <form id="registrationForm" class="form-example">
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required />
+            <span id="nameError" class="error" style="color: red; display: none"
+              >El nombre es obligatorio</span
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            <span
+              id="emailError"
+              class="error"
+              style="color: red; display: none"
+              >Introduce un email válido</span
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+            />
+            <span
+              id="passwordError"
+              class="error"
+              style="color: red; display: none"
+              >La contraseña debe tener al menos 6 caracteres</span
+            >
+          </div>
+
+          <button type="submit">Registrarse</button>
+        </form>
+
+        <div id="formResult" style="margin-top: 20px"></div>
+
+        <div class="code-example">
+          <pre>
+// Validación de formulario
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    let isValid = true;
+    
+    // Validar nombre
+    if (name.trim() === '') {
+        document.getElementById('nameError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('nameError').style.display = 'none';
+    }
+    
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        document.getElementById('emailError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('emailError').style.display = 'none';
+    }
+    
+    // Validar contraseña
+    if (password.length < 6) {
+        document.getElementById('passwordError').style.display = 'block';
+        isValid = false;
+    } else {
+        document.getElementById('passwordError').style.display = 'none';
+    }
+    
+    if (isValid) {
+        document.getElementById('formResult').innerHTML = `
+            <div style="background-color: var(--success-color); color: white; padding: 10px; border-radius: 5px;">
+                ¡Formulario enviado correctamente!
+            </div>
+        `;
+        // Aquí normalmente enviaríamos los datos al servidor
+    }
+});
+                </pre>
+        </div>
+      </section>
+
+      <!-- Sección 5: Cambio de estilos CSS con JavaScript -->
+      <section class="section">
+        <h2>5. Cambio de estilos CSS con JavaScript</h2>
+        <p>
+          Podemos modificar dinámicamente los estilos CSS de los elementos
+          mediante JavaScript.
+        </p>
+
+        <h3>Ejemplo: Panel de control de estilos</h3>
+        <div class="controls">
+          <input type="color" id="bgColor" value="#4a6fa5" />
+          <label for="bgColor">Color de fondo</label>
+
+          <input type="range" id="borderRadius" min="0" max="50" value="5" />
+          <label for="borderRadius"
+            >Border radius: <span id="radiusValue">5px</span></label
+          >
+
+          <input type="range" id="padding" min="5" max="50" value="20" />
+          <label for="padding"
+            >Padding: <span id="paddingValue">20px</span></label
+          >
+
+          <button id="applyStyles">Aplicar estilos</button>
+          <button id="resetStyles">Restablecer estilos</button>
+        </div>
+
+        <div id="styleDemo" class="flex-container">
+          <div class="flex-item">Elemento de demostración</div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // ===== SECCIÓN 1: FLEXBOX =====
+      const flexDemo = document.getElementById("flexDemo");
+      const flexDirection = document.getElementById("flexDirection");
+      const justifyContent = document.getElementById("justifyContent");
+      const alignItems = document.getElementById("alignItems");
+      const addItemBtn = document.getElementById("addItem");
+      const removeItemBtn = document.getElementById("removeItem");
+      const cssCode = document.getElementById("cssCode");
+
+      // Actualizar propiedades de flexbox
+      function updateFlexProperties() {
+        flexDemo.style.flexDirection = flexDirection.value;
+        flexDemo.style.justifyContent = justifyContent.value;
+        flexDemo.style.alignItems = alignItems.value;
+
+        // Actualizar código CSS mostrado
+        cssCode.textContent = `/* Código CSS actual */
+#flexDemo {
+    display: flex;
+    flex-direction: ${flexDirection.value};
+    justify-content: ${justifyContent.value};
+    align-items: ${alignItems.value};
+}`;
+      }
+
+      // Añadir elemento
+      addItemBtn.addEventListener("click", () => {
+        const itemCount = flexDemo.children.length + 1;
+        const newItem = document.createElement("div");
+        newItem.className = "flex-item";
+        newItem.textContent = itemCount;
+        flexDemo.appendChild(newItem);
+      });
+
+      // Eliminar elemento
+      removeItemBtn.addEventListener("click", () => {
+        if (flexDemo.children.length > 1) {
+          flexDemo.removeChild(flexDemo.lastChild);
+        }
+      });
+
+      // Escuchar cambios en los selectores
+      flexDirection.addEventListener("change", updateFlexProperties);
+      justifyContent.addEventListener("change", updateFlexProperties);
+      alignItems.addEventListener("change", updateFlexProperties);
+
+      // ===== SECCIÓN 2: MANIPULACIÓN DEL DOM =====
+      const selectItemsBtn = document.getElementById("selectItems");
+      const changeColorBtn = document.getElementById("changeColor");
+      const resetColorBtn = document.getElementById("resetColor");
+      const showTreeBtn = document.getElementById("showTree");
+      const nodeTree = document.getElementById("nodeTree");
+
+      // Seleccionar elementos flex
+      selectItemsBtn.addEventListener("click", () => {
+        const flexItems = document.querySelectorAll(".flex-item");
+        flexItems.forEach((item) => {
+          item.style.outline = "2px solid red";
+        });
+
+        setTimeout(() => {
+          flexItems.forEach((item) => {
+            item.style.outline = "";
+          });
+        }, 2000);
+      });
+
+      // Cambiar color de elementos
+      changeColorBtn.addEventListener("click", () => {
+        const flexItems = document.querySelectorAll(".flex-item");
+        flexItems.forEach((item) => {
+          item.style.backgroundColor = getRandomColor();
+        });
+      });
+
+      // Restablecer colores
+      resetColorBtn.addEventListener("click", () => {
+        const flexItems = document.querySelectorAll(".flex-item");
+        flexItems.forEach((item) => {
+          item.style.backgroundColor = "";
+        });
+      });
+
+      // Mostrar árbol de nodos
+      showTreeBtn.addEventListener("click", () => {
+        if (nodeTree.style.display === "none") {
+          nodeTree.style.display = "block";
+          nodeTree.innerHTML = generateNodeTree(flexDemo);
+        } else {
+          nodeTree.style.display = "none";
+        }
+      });
+
+      // Función para generar árbol de nodos
+      function generateNodeTree(element, depth = 0) {
+        let html = "";
+        const indent = "  ".repeat(depth);
+
+        // Obtener información del elemento actual
+        const tagName = element.tagName.toLowerCase();
+        const id = element.id ? ` id="${element.id}"` : "";
+        const classes = element.className
+          ? ` class="${element.className}"`
+          : "";
+
+        html += `${indent}&lt;${tagName}${id}${classes}&gt;\n`;
+
+        // Procesar hijos
+        if (element.children.length > 0) {
+          for (let child of element.children) {
+            html += generateNodeTree(child, depth + 1);
+          }
+        } else if (element.textContent.trim()) {
+          html += `${indent}  ${element.textContent.trim()}\n`;
+        }
+
+        html += `${indent}&lt;/${tagName}&gt;\n`;
+
+        return html;
+      }
+
+      // Función auxiliar para generar colores aleatorios
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // ===== SECCIÓN 3: ARRASTRAR Y SOLTAR =====
+      document.querySelectorAll(".draggable-item").forEach((item) => {
+        item.addEventListener("dragstart", (e) => {
+          e.dataTransfer.setData("text/plain", e.target.textContent);
+          e.target.classList.add("dragging");
+        });
+
+        item.addEventListener("dragend", (e) => {
+          e.target.classList.remove("dragging");
+        });
+      });
+
+      const dropZone = document.getElementById("dropZone");
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add("active");
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("active");
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const data = e.dataTransfer.getData("text/plain");
+        const newElement = document.createElement("div");
+        newElement.className = "draggable-item";
+        newElement.textContent = data;
+        newElement.draggable = true;
+
+        // Añadir eventos al nuevo elemento
+        newElement.addEventListener("dragstart", (e) => {
+          e.dataTransfer.setData("text/plain", e.target.textContent);
+          e.target.classList.add("dragging");
+        });
+
+        newElement.addEventListener("dragend", (e) => {
+          e.target.classList.remove("dragging");
+        });
+
+        dropZone.appendChild(newElement);
+        dropZone.classList.remove("active");
+      });
+
+      // ===== SECCIÓN 4: FORMULARIO =====
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          let isValid = true;
+
+          // Validar nombre
+          if (name.trim() === "") {
+            document.getElementById("nameError").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("nameError").style.display = "none";
+          }
+
+          // Validar email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            document.getElementById("emailError").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("emailError").style.display = "none";
+          }
+
+          // Validar contraseña
+          if (password.length < 6) {
+            document.getElementById("passwordError").style.display = "block";
+            isValid = false;
+          } else {
+            document.getElementById("passwordError").style.display = "none";
+          }
+
+          if (isValid) {
+            document.getElementById("formResult").innerHTML = `
+                    <div style="background-color: #51cf66; color: white; padding: 10px; border-radius: 5px;">
+                        ¡Formulario enviado correctamente!
+                    </div>
+                `;
+            // Aquí normalmente enviaríamos los datos al servidor
+          }
+        });
+
+      // ===== SECCIÓN 5: CAMBIO DE ESTILOS =====
+      const bgColor = document.getElementById("bgColor");
+      const borderRadius = document.getElementById("borderRadius");
+      const padding = document.getElementById("padding");
+      const radiusValue = document.getElementById("radiusValue");
+      const paddingValue = document.getElementById("paddingValue");
+      const applyStylesBtn = document.getElementById("applyStyles");
+      const resetStylesBtn = document.getElementById("resetStyles");
+      const styleDemo = document.getElementById("styleDemo");
+
+      // Actualizar valores mostrados
+      borderRadius.addEventListener("input", () => {
+        radiusValue.textContent = `${borderRadius.value}px`;
+      });
+
+      padding.addEventListener("input", () => {
+        paddingValue.textContent = `${padding.value}px`;
+      });
+
+      // Aplicar estilos
+      applyStylesBtn.addEventListener("click", () => {
+        styleDemo.style.backgroundColor = bgColor.value;
+        styleDemo.style.borderRadius = `${borderRadius.value}px`;
+        styleDemo.querySelector(
+          ".flex-item"
+        ).style.padding = `${padding.value}px`;
+      });
+
+      // Restablecer estilos
+      resetStylesBtn.addEventListener("click", () => {
+        styleDemo.style.backgroundColor = "";
+        styleDemo.style.borderRadius = "";
+        styleDemo.querySelector(".flex-item").style.padding = "";
+        bgColor.value = "#4a6fa5";
+        borderRadius.value = 5;
+        padding.value = 20;
+        radiusValue.textContent = "5px";
+        paddingValue.textContent = "20px";
+      });
+    </script>
+  </body>
+</html>
