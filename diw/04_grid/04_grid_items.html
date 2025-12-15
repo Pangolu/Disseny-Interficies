@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="va_ES">
+<head>
+<meta charset="utf-8" />
+
+<link rel="stylesheet" type="text/css" href="./04_grid_items.css">
+
+<style>
+      
+/**********  PON TUS ESTILOS AQU� ****************/
+
+</style>
+
+<script>
+
+let descripciones=[
+	"", /* La primera descripción es la 0 y no se usa */
+	"Nada, un grid normal gtc: auto auto auto",
+	"Aprendemos como seleccionar un item determinado de un grid concreto",
+	"elemento 4 : grid-column-start: 3 . La colocación de items siempre avanza en columnas y filas",
+	"Reubicandoi dos celdas tratamos de conseguir los máximos huecos",
+	"5- Aço no es deu de fer, pero hui es divendres i anem a posar  \
+	grid-column-start:4 en una grid de tres columnes. Ell, \
+	mira primer els elements pera vore quantes columnes hi ha \
+	realment, i desprès es posa a colocar elements ",
+	"Ejercicio: Hacer esta tabla con grid-column-start",
+	"Tercer elemento : grid-row-start:3...  ¡¡¡ GRID-ROW-START !!!",
+	"Probando a poner dos items en el mismo grid-row-start",
+	"Tercer elemento (c) en la fila 6. sin/con gap, sin margen",
+	"celda 3 y 7 con grid-row-start:2 , y celda 2 \
+	con grid-column-start:1. Se coloca primero la celda \"C\", \
+	después la \"G\", y entonces empiezan el resto de celdas desde \
+	la \"A\", cuando llega el turno a la \"B\", se le busca la \
+	primera fila con la primera columna libre",
+	"elemento c con grid-row-start:1 y grid-row-end:2 no tiene \
+	efecto porque ese 2 indica -al principio de- la 2 \
+	por eso el elemento D tiene grid-row-start:1 y grid-row-end:3\
+	y sí que amplía dos filas",
+		"elemento c con grid-column-start:1 y column-end:3 elemento \
+		D tiene grid-row-start:1 y grid-row-end:3\
+	y sí que amplía dos filas. Pa vore-ho guay he posat \
+	grid-template-rows:repeat(5,1fr)",
+	"13 expandir un elemento varias filas y columnas con grid-row/column-start/end",
+	"Ejercicio:" , 
+	"15 - ",
+	"17- Cuando se expanden más filas por culpa de una celda\
+	sin que haya otras columnas, la altura de esas filas es \
+	prácticamente 0 (por el gap no lo es, por ejemplo) \
+	la celda 17-D roja ocupa varias filas",
+	"Ejercicio complicao perturbador",
+	"18",
+	"19 - grid espaciador para faclitar scroll" 
+	]
+
+let contenidoCeldas = [
+	{ tabla:577, celda:577 , contenido:"" },
+  { tabla:677, celda:577 , contenido:"" },
+{ tabla:777, celda:577 , contenido:"" }, 
+	{ tabla:877, celda:577 , contenido:""}
+];
+
+
+function contenido( nT, nC)  {
+	let htmlCelda = "<div>" + nT + " - " +
+						String.fromCharCode(nC + 65 ) + " </div>";
+
+	for (let i=0 ; i < contenidoCeldas.length; i++){
+		if ( contenidoCeldas[i].tabla == nT &&
+				contenidoCeldas[i].celda == nC)
+				return "<div>" + contenidoCeldas[i].contenido+ " </div>";
+	
+	}
+
+
+	return htmlCelda;
+}
+
+/********** DOMContentLoaded ***********************/
+/*document.addEventListener("DOMContentLoaded", function(event) {
+	customElements.define("mi-grid",MiGrid,{extends: 'div'});
+	console.log("hola");
+});*/
+</script>
+
+</head>
+<body>
+
+<div id="unDiv" > Probar grid-auto-flow en una tabla de las iniciales 
+	(una vez) establecido grid-template-column y grid-template-rows</div>
+
+<script>
+
+let totalGrids = 20;
+let totalCells = 8;
+
+/* empesamos en uno poque la sero no mola verla */
+	for (let numTabla=1 ; numTabla < totalGrids; numTabla++) {
+		let codigo="<div style=\"margin-top:1em\"> Tabla " + numTabla + "</div>";
+		if (numTabla < descripciones.length) 
+			codigo += "<div class=\"descripcion\"> " + numTabla+ "  " + 
+					descripciones[numTabla] +"</div>" ;
+
+		codigo += "<div class=\"gc\">" ;
+
+		for (let numCelda = 0; numCelda < totalCells; numCelda++){
+		
+				let htmlCelda = contenido(numTabla,numCelda);
+				codigo += htmlCelda;	
+		}
+			
+		codigo +="</div>"
+		
+		document.body.innerHTML += codigo
+	}
+
+</script>
+
+
+</body>
+</html>

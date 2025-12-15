@@ -1,0 +1,67 @@
+.descripcion{
+	font-family:'Courier New', Courier, monospace;
+	font-size:1rem;
+}
+
+h1{
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.item-base, .item-arriba, .item-estirado{
+	width:30px;
+	height:30px;
+	margin: .5em;
+	/*line-height:30px;*/
+	color:aliceblue;
+	text-align: center;
+	background-color:purple;	
+}
+
+.item-grande {
+	background-color:cyan; /* cambia */
+	color:darkblue; /* cambia */
+	height:30px;
+	margin: .5em;
+	text-align: center;
+	width:120px; /* buscado */
+}
+
+.item-cuadrado {
+	background-color:darkred; /* cambia */
+	color:pink; /* cambia */
+	height:30px;
+	margin: .5em;
+	text-align: center;
+	width:60px; /* buscado */
+	height:60px;
+}
+
+
+.container-base {
+		background-color:yellow;
+		border:1px dashed lightgray;
+		margin:10px;
+}
+
+.flex-basico-00 {
+	display:flex;
+	flex-direction:row; /* por defecto */
+}
+
+
+.reorder .item-base:nth-child(2), .reorder .item-base:nth-child(3), .reorder .item-base:nth-child(10){
+	background-color:blue ;
+	order: -18;
+}
+
+.reorder .item-base:nth-child(4) {
+	background-color:palevioletred ;
+	order: -19;
+}
+.reorder .item-base:nth-child(5) {
+	background-color:darkblue ;
+	order: -15;
+}
+
+
+

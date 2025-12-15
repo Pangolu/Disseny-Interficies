@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio DOM</title>
+ <script>
+
+ function mostrarInfo(elemento){
+  console.log("Tag: " + elemento.tagName + "  Contenido: " +
+  elemento.textContent.slice(0,40));
+ }
+
+ function mostrarInfoNivel(elemento,nivel){
+ espacio = "\t".repeat(nivel);
+ console.log(espacio + "Tag: " + elemento.tagName + "  Contenido: " +
+  elemento.textContent.slice(0,40));
+ }
+
+
+ function mostrarId() {
+  let elemento = document.getElementById("titulo-principal");
+  mostrarInfo(elemento);
+
+ }
+
+ function mostrarPorTag(tagAMostrar){
+  let elementos = document.getElementsByTagName(tagAMostrar);
+
+  for (let i=0; i < elementos.length; i++){
+    let elemento = elementos.item(i);
+    //elemento = elementos[i];
+
+    mostrarInfo(elemento);
+  }
+ }
+
+
+  function mostrarPorClase(claseAMostrar){
+  let elementos = document.getElementsByClassName(claseAMostrar);
+
+  for (let i=0; i < elementos.length; i++){
+    let elemento = elementos.item(i);
+    //elemento = elementos[i];
+
+    mostrarInfoNivel(elemento,3);
+  }
+ }
+
+ function mostrarArbol(element,nivel){
+   const hijosLocal =Array.from( element.children);
+
+    for (let i = 0; i < hijosLocal.length; i++){
+      mostrarInfoNivel(hijosLocal[i], nivel);
+      mostrarArbol(hijosLocal[i], nivel + 1);
+    }
+ }
+//
+
+function mostrarTextoClases(elemento){
+  mensaje = "Texto: " +
+    elemento.textContent.slice(0,80).replace(/[\r\n]/g, '');
+
+  if (elemento.classList.length > 0 )
+    mensaje = mensaje +
+    "||||||||||| clases: " + elemento.classList;
+  console.log(mensaje);
+}
+
+function mostrarArbolTextosClases(elemento){
+
+  mostrarTextoClases ( elemento);
+
+   const hijosLocal = elemento.children;
+
+    for (let i = 0; i < hijosLocal.length; i++){
+      mostrarArbolTextosClases(hijosLocal[i]);
+    }
+
+}
+
+ function inicializar(){
+/*    mostrarId();
+    mostrarPorTag("p");
+    console.log("============== vamos por clase destacado ==========");
+    mostrarPorClase("destacado");
+
+    console.log("========================================");
+    console.log("========================================");
+
+    mostrarArbol(document.getElementsByTagName("section")[0],0);
+*/
+    mostrarArbolTextosClases(document.body);
+  }
+
+
+
+document.addEventListener("DOMContentLoaded", inicializar);
+</script>
+</head>
+<body>
+  <header>
+    <h1 id="titulo-principal">Bienvenido al ejercicio DOM</h1>
+    <div> Este ejercicio pretende mostrar cómo recorrer el DOM y también seleccionar
+    elementos con unas condiciones particulares </div>
+  </header>
+
+  <section id="contenido">
+    <p class="destacado">Este es un párrafo destacado.</p>
+    <p>Este es un párrafo normal con un <span>span interno</span>.</p>
+
+    <div class="destacado pepe ">
+      <p class="destacado juan perico andres">Otro párrafo dentro de un div.</p>
+	  <p >Este párrafo no tiene la misma clase que el anterior.</p>      
+	  <p class="destacado fulano">ojito con este <span class="destacado"> span span interior </span></p>
+      <p class="destacado">El último parrafo de este bloque con un
+      	elemento vacío en su  <span></span> interior.</p>	  
+    </div>
+
+    <ul>
+      <li>Elemento 1</li>
+      <li class="sotano vengano ">Elemento 2</li>
+      <li class="mariano jaime">Elemento 3</li>
+    </ul>
+  </section>
+
+  <footer>
+    <small>&copy; 2025</small>
+  </footer>
+</body>
+</html>

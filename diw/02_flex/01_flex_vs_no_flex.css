@@ -1,0 +1,79 @@
+.descripcion{
+	font-family:'Courier New', Courier, monospace;
+	font-size:.8em;
+}
+
+h1{
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+.item { /* color item básico, sin tamaños, pensado para items con texto*/
+	color:aliceblue;
+	text-align:center;
+	background-color:darkblue;
+	margin:  .5em;
+	font-family:'Courier New', Courier, monospace;
+
+}
+
+
+.item-ancho {
+	width:100px;
+	margin: .5em;
+	background-color:purple;	
+}
+
+.item-inline{
+	display:inline;
+	background-color:darkgreen;
+}
+.item-inlineblock{
+	display:inline-block;
+	background-color:darkgreen;
+}
+
+.item-muyancho {
+	color:black;
+	width:200px;
+	background-color:cyan;
+}
+
+.container {
+		background-color:lightyellow;
+		border:1px dashed darkred;
+		margin:10px;
+}
+
+.container-flex {
+	display:flex;
+}
+
+.directionColumn {
+	flex-direction:column;
+}
+
+.container-wrap{
+	flex-wrap: wrap;
+	background-color:lightpink;
+}
+
+.alto {
+	height:180px;
+}
+
+.espaciador {
+	display:flex;
+	flex-direction:column;
+	justify-content: flex-end;
+	align-content:center;
+	height:200px;
+	border:1px solid red;
+}
+
+
+
+
+
+
+

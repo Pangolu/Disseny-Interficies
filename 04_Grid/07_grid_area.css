@@ -1,0 +1,36 @@
+body {
+	background-color:lightgrey;
+
+}
+
+.contenedor{
+	display:grid;
+	grid-template-columns: repeat(4,1fr);
+	grid-template-rows: repeat(3,100px);
+	grid-template-areas: 
+	"lateral cabecera cabecera cabecera"
+	"lateral cuerpo cuerpo cuerpo"
+	"pie pie - -";
+
+}
+
+.lateral {
+	background-color:salmon;
+	grid-area: lateral;
+}
+
+.cuerpo {
+	background-color:blue;
+	grid-area: cuerpo;
+}
+.cabecera {
+	background-color:violet;
+	color:white;
+	grid-area: cabecera;
+}
+
+.pie {
+	background-color:lime;
+	grid-area: pie;
+}
+

@@ -1,0 +1,77 @@
+body {
+    background-color:lightyellow;
+}
+
+a { 
+	line-height: 100%;
+	background-color: white;
+}
+
+.cabecera {
+    display:flex;
+    flex-direction: row-reverse;
+}
+
+img {
+height: 100%;
+}
+
+.cabecera__menu{
+	display: flex;
+	flex-direction: row-reverse;
+	
+}
+
+.cabecera__menuitem{
+    border:2px solid lightcyan;
+    background-color: deepskyblue;
+    padding:1em 1em;
+    text-align: center;
+   /* line-height: 100%; */
+   
+}
+
+.cabecera__menuitem--special{
+	
+}
+
+.principal {
+
+	
+}
+
+.principal__lateral {
+	
+
+}
+
+.principal__album{
+
+}
+
+.recuadro{
+	
+	margin:2px;
+
+	background-color:lightseagreen;
+	
+}
+
+
+.pie {
+	margin:2em;
+	
+}
+
+.pie__dedo {
+/*	border: 
+	margin: 
+	outline: 
+	padding:*/
+}
+/*
+.???{
+	outline:2vw solid magenta;
+}
+*/
+

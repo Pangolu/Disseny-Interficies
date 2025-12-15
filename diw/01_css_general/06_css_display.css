@@ -1,0 +1,43 @@
+body {
+	background-color:white;
+
+}
+
+div {
+	width:400px;
+	height:300px;
+}
+
+.azul {
+	background-color:lightblue;
+}
+
+.rosa {
+	background-color:lightpink;
+}
+
+.verde {
+	background-color:lightgreen;
+	border:1px dashed black;
+}
+
+.naranja {
+	background-color:orange;
+}
+
+.gris {
+	background-color:lightgray;
+}
+
+.amarillo{
+	background-color:lightyellow;
+}
+
+.salmon {
+	background-color:darksalmon;
+	border:1px solid red;
+	
+	}
+.oliva {
+	background-color:olive;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head>
+    <meta charset="UTF-8">
+    <title>Examen GRID 23-24</title>
+	<link rel="stylesheet" type="text/css" href="./Grid_autoDiscover_out_of_order.css">
+
+
+<script>
+
+let filas = [];
+let columnas = []
+function encontrarFO(){
+	let tabla = document.getElementById("tabla1");
+	let items = tabla.children; // a saco
+//	let items = tabla.getElementsByClassName("item");
+	// no va items.forEach( (item) => {console.log(item)});
+	let geoTabla = tabla.getBoundingClientRect();
+	let topTabla = geoTabla.top;
+	let leftTabla = geoTabla.left;
+	for( item of items) {
+
+		let geo = item.getBoundingClientRect() ;
+		/*console.log(" " + item.innerHTML + " en posicion:  left: " +
+				geo.left + " , top: " + geo.top );
+*/
+		let leftItem = geo.left - leftTabla;
+		let topItem = geo.top - topTabla;
+
+		console.log(" " + item.innerHTML + " en posicion:  left: " +
+				leftItem + " , top: " + topItem );
+
+
+
+
+	}
+
+}
+
+
+function iniciar() {
+	encontrarFO();
+}
+
+document.addEventListener("DOMContentLoaded", iniciar);
+</script>
+</head>
+
+<body>
+
+	<div class="gc" id="tabla1">
+		 <div class="grid-item" >celda 1 </div>
+		<div class="grid-item">celda 2</div>
+		<div class="grid-item">celda 3.</div>
+		<div class="grid-item"> celda 4. </div>
+		<div class="grid-item "> celda 5. </div>
+		<div class="grid-item"> 6</div>
+		<div class="grid-item  "> 7</div>
+		<div class="grid-item "> 8</div>
+		<div class="grid-item "> 9</div>
+		<div class="grid-item "> 10</div>
+		<div class="grid-item" > 11</div>
+		<div class="grid-item">12</div>
+		<div class="grid-item">13</div>
+		<div class="grid-item">1 - 14</div>
+		<div class="grid-item">1 - 15</div>
+		<div class="grid-item">1 - 16</div>
+	</div>
+
+</body>
+
+</html>
+

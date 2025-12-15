@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" type="text/css" href="./01_flex_vs_no_flex.css">
+
+<style>
+
+</style>
+
+</head>
+
+<body>
+
+<h1> TÍTULO </h1>
+<div class="descripcion">Salvo indicado, todos los item son div </div>
+
+
+<h1> 1a. Container base (Sin Flex) </h1>
+<div class="descripcion"> Container e items (divs azules) sin nada especial. El estiramiento en anchura es natural.
+	La altura de cada item se obtiene por el texto que contiene. ¿La anchura de cada item? 
+... pues la normal de un display:block  </div>
+<div class="container" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 1b. Container base (Sin Flex) items display:div-inline</h1>
+<div class="descripcion"> items son div con display:inline; Por ello el alineamiento es baseline (texto) los
+	elementos inline no se comportan igual con el margen vertical </div>
+<div class="container" >
+	<div class="item item-inline">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inline">2</div>
+	<div class="item item-inline">3</div>
+	<div class="item item-inline">4</div>
+</div>
+
+<h1> 1c. Container base (Sin Flex) items div inline-block</h1>
+<div class="descripcion"> items son div con display:inline-block; ahora los márgenes de los item vuelven a respetarse
+	no como antes con display:inline
+</div>
+<div class="container" >
+	<div class="item item-inlineblock">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inlineblock">2</div>
+	<div class="item item-inlineblock">3</div>
+	<div class="item item-inlineblock">4</div>
+</div>
+
+<h1> 2a. Container base (Sin Flex) items display: (por defecto) ancho  </h1>
+<div class="descripcion">Seguimos con el container normal y los item son div normales,
+	aunque tienen un width:100px (o similar). La altura del primer div viene determinada
+por el contenido. Observa que no cabe el texto por haber establecido poca anchura  </div>
+<div class="container" >
+	<div class="item item-ancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-ancho">2</div>
+	<div class="item item-ancho">3</div>
+	<div class="item item-ancho">4</div>
+</div>
+
+<h1> 2b. Container base (Sin Flex) items inline (por defecto) con anchura establecida</h1>
+<div class="descripcion"> items son div con display:inline; y con width:100px como antes.
+	Sin embargo ¡ width no funciona !... porque son inline </div>
+<div class="container" >
+	<div class="item item-inline item-ancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inline item-ancho">2</div>
+	<div class="item item-inline item-ancho">3</div>
+	<div class="item item-inline item-ancho">4</div>
+</div>
+
+<h1> 2c. Container base (Sin Flex) items div inline-block</h1>
+<div class="descripcion"> items son div con display:inline-block; La altura del elemento
+	primero se debe a su contenido. </div>
+<div class="container" >
+	<div class="item item-inlineblock item-ancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-inlineblock item-ancho">2</div>
+	<div class="item item-inlineblock item-ancho">3</div>
+	<div class="item item-inlineblock item-ancho">4</div>
+</div>
+
+<h1> 3a. Container base ¡ FLEX ! </h1>
+<div class="descripcion"> Container flex con items normales sin nada especial.  </div>
+<div class="container container-flex" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 3b. Container base ¡ FLEX ! </h1>
+<div class="descripcion"> Container flex con items normales sin nada especial. 
+	se ha añadido un texto y un span dentro del contenedor. Ambos pasan a ser hijos
+	del contenedor flex y se tratan como un item más
+</div>
+<div class="container container-flex" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+
+	un texo por aquí
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<span> un span por allá</span>
+	<div class="item ">4</div>
+</div>
+
+
+<h1> 3c. Container base FLEX! flex-direction:column;</h1>
+<div class="descripcion"> Container flex con items normales sin nada especial. Mismo contenido
+	 que antes. Pero ahora flex-direction:column; El main-axis es ahora vertical y se rellena de
+	arriba a abajo</div>
+<div class="container container-flex directionColumn" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+<h1> 4a. Container Flex. Items con anchura preestablecida  </h1>
+<div class="descripcion"> Container flex con items de anchura preestablecida. El 
+	primer item establece una altura en la fila y observa cómo los demás items se 
+estiran en el cross-axis para ocupar toda la altura </div>
+<div class="container container-flex" >
+	<div class="item item-muyancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-muyancho">2</div>
+	<div class="item item-muyancho">3</div>
+	<div class="item item-muyancho">4</div>
+	<div class="item item-muyancho">5</div>
+	<div class="item item-muyancho">6</div>
+	<div class="item item-muyancho">7</div>
+
+</div>
+
+<h1> 4b. Container Flex. Items Anchos  </h1>
+<div class="descripcion"> Nada especial... items anchos, pero ahora con texto. Si estrechas
+	el navegador, verás que los items se estrechan enseguida mientras quepa la palabra más 
+larga (la palabra más larga es "min-content")  </div>
+<div class="container container-flex" >
+	<div class="item item-muyancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-muyancho">en un lugar de la mancha</div>
+	<div class="item item-muyancho">hoy es martes mañana</div>
+	<div class="item item-muyancho">roncasallaconyaclitrona anis del mono</div>
+	<div class="item item-muyancho">hola holita holitaholita</div>
+	<div class="item item-muyancho">3</div>
+	<div class="item item-muyancho">4</div>
+
+</div>
+
+<h1>  5a Container Flex. Items Anchos y wrap </h1>
+<div class="descripcion"> Ahora con flex-wrap:wrap (rosa color de fondo por ello)
+	 con items con width:100px. estrecha el navegador a ver qué ocurre </div>
+<div class="container container-flex container-wrap" >
+	<div class="item item-muyancho">1 (text-align:center; margin:.5em )</div>
+	<div class="item item-muyancho">en un lugar de la mancha</div>
+	<div class="item item-muyancho">hoy es martes mañana</div>
+	<div class="item item-muyancho">roncasallaconyaclitrona anis del mono</div>
+<div class="item item-muyancho">hola holita holitaholita</div>
+	<div class="item item-muyancho">3</div>
+	<div class="item item-muyancho">4</div>
+</div>
+
+
+<h1>5b Container Flex + wrap. Items sin anchura establecida  </h1>
+<div class="descripcion"> Ahora con flex-wrap:wrap items SIN width:</div>
+<div class="container container-flex container-wrap" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">en un lugar de la mancha</div>
+	<div class="item ">hoy es martes mañana</div>
+	<div class="item ">roncasallaconyaclitrona anis del mono aigua mineral i aigua de vlaencia</div>
+<div class="item ">hola holita holitaholita</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+</div>
+
+
+
+<h1> 6a. Container Flex. Flex-direction:column no-wrap (sobra altura) </h1>
+<div class="descripcion"> Para ver el efecto de wrap debemos limitar el espacio en el 
+	main-axis. Dado que flex-direction:column, el main axis es vertical y por tanto debemos 
+	establecer manualmente una altura. De lo contrario, el navegador entrega altura infinita
+	bajo demanda a cualquier contenedor que lo pida. En este contenedor... sobra espacio
+</div>
+<div class="container container-flex directionColumn alto " >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+
+</div>
+
+<h1> 6b. Container Flex. Flex-direction:column no-wrap (falta altura)</h1>
+<div class="descripcion">El contenedor es el mismo que antes, pero ahora FALTA espacio
+	en el main axis (vertical). el problema es que esto es no-wrap y por ello
+	no se crean nuevas líneas (nuevas columnas), y el contenido desborda
+</div>
+<div class="container container-flex directionColumn alto " >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+		<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+
+</div>
+<div class="espaciador"> espacio en blanco</div>
+<h1> 7. Container Flex. Flex-direction:column wrap (falta altura) </h1>
+<div class="descripcion"> Ahora con wrap, se crean distintas columnas 
+	para acomodar el contenido en el main-axis
+</div>
+<div class="container container-flex directionColumn alto container-wrap" >
+	<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+		<div class="item ">1 (text-align:center; margin:.5em )</div>
+	<div class="item ">2</div>
+	<div class="item ">3</div>
+	<div class="item ">4</div>
+
+</div>
+
+</body>

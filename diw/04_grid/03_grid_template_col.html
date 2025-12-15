@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="va_ES">
+<head>
+<meta charset="utf-8" />
+
+<link rel="stylesheet" type="text/css" href="./03_grid_template_col.css">
+
+<style>
+      
+/**********  PON TUS ESTILOS AQU� ****************/
+
+</style>
+
+<script>
+
+let descripciones=[
+	"", /* La primera descripción es la 0 y no se usa */
+	"tabla con grid, sin anchura específica. 	grid-template-columns: auto auto auto;",
+	"tabla con grid, con anchura 100%. 	grid-template-columns: auto auto auto;\
+	la tabla estira todas las columnas obligándolas a hacerse más grandes ",
+	"tabla con grid-template-columns:auto auto 1fr grid-t-r : auto, auto, rellena con más filas. 1fr se lleva \
+	el espacio extra y auto puede contraerse hasta el contenido",
+	"grid-t-c : auto auto auto, grd-t-r auto auto auto , grid-auto-flow:column;",
+	"grid-template-columns: 100px 20em 25%;",
+	"grid-template-columns: 200px 3fr 1fr;",
+	"200px 3fr 1fr + contenido en la última columna",
+	"grid-template-columns: 400px 3fr 10%; + contenido que no cabe en la última columna",
+	"1fr repeat(2,10em) 1fr",
+	"minmax(400px, 700px) auto auto ",
+	"minmax(20% , 2fr) auto auto",
+	"grid-template-columns: minmax(40% , 60%) auto auto ;",
+	"grid-template-columns: 100px min-content max-content ;",
+	"repeat(3, minmax(min-content,max-content))",
+	"15 PROBAR 25-26 grid-auto-rows",
+	""
+	]
+
+
+let contenidoCeldas = [
+{ tabla:1, celda:3 , contenido:"unas pocas palabras" },	
+{ tabla:1, celda:5 , contenido:"otras pocas palabras" },	
+{ tabla:3, celda:3 , contenido:"unas pocas palabras" },	
+	{ tabla:5, celda:5 , contenido:"supercalifragilístico" },
+  { tabla:6, celda:5 , contenido:"supercalifragilísticoespirial" },
+    { tabla:6, celda:2 , contenido:"esta es una frase más larga que la anterior" },
+
+{ tabla:7, celda:5 , contenido:"supercalifragilístico" }, 
+	{ tabla:8, celda:5 , contenido:"conteniiiiiiido varios"},
+	{ tabla:1110, celda:4 , contenido:"mucho contenido a base de varias apalabras . ohhhh! "},
+	{ tabla:1110, celda:5 , contenido:"contenido"},
+
+	{ tabla:10, celda:4 , contenido:"mucho contenido  "},
+	{ tabla:10, celda:5 , contenido:"contenido"},
+	
+		{ tabla:11, celda:4 , contenido:"Renglón de varias palabras "},
+	{ tabla:11, celda:5 , contenido:"Renglón de varias palabras"},
+	
+		{ tabla:12, celda:4 , contenido:"Renglón de varias palabras"},
+	{ tabla:12, celda:5 , contenido:"Renglón de contdsfsdfsflroooo"},
+	{ tabla:12, celda:6 , contenido:"hola nene eres listo , beer"},	
+	
+		{ tabla:13, celda:4 , contenido:"Renglón de varias palabras"},
+	{ tabla:13, celda:5 , contenido:"Renglón de contdsfsdfsfsdfsfsenidosfsdfsdfsdfsdfsfsdflroooo"},
+	{ tabla:13, celda:6 , contenido:"hola nene eres listo , beer"},		
+	{ tabla:14, celda:7 , contenido:"contenido última celda"},
+	{ tabla:14, celda:6 , contenido:"contenido penúltima celda pero expandido para ver"},
+	{ tabla:14, celda:5 , contenido:"contenido antepenúltima celda ssssupppppeeeeeerraaaaalloooo"}
+];
+
+
+function contenido( nT, nC)  {
+	let htmlCelda = "<div>" + nT + " - " +
+						String.fromCharCode(nC + 65 ) + " </div>";
+
+	for (let i=0 ; i < contenidoCeldas.length; i++){
+		if ( contenidoCeldas[i].tabla == nT &&
+				contenidoCeldas[i].celda == nC)
+				return "<div>" + contenidoCeldas[i].contenido+ " </div>";
+	
+	}
+
+
+	return htmlCelda;
+}
+
+/********** DOMContentLoaded ***********************/
+/*document.addEventListener("DOMContentLoaded", function(event) {
+	customElements.define("mi-grid",MiGrid,{extends: 'div'});
+	console.log("hola");
+});*/
+</script>
+
+</head>
+<body>
+
+<div id="unDiv" > body. es flex-column-align(center) Probar grid-auto-flow en una tabla de las iniciales 
+	(una vez) establecido grid-template-column y grid-template-rows</div>
+
+<script>
+
+let totalGrids = 16;
+let totalCells = 8;
+
+	for (let numTabla=1 ; numTabla < totalGrids; numTabla++) {
+		let codigo="<div style=\"margin-top:1em\"> Tabla " + numTabla + "</div>";
+		if (numTabla < descripciones.length) 
+			codigo += "<div class=\"descripcion\"> " + numTabla+ "  " + 
+					descripciones[numTabla] +"</div>" ;
+
+		codigo += "<div class=\"gc\">" ;
+
+		for (let numCelda = 0; numCelda < totalCells; numCelda++){
+		
+				let htmlCelda = contenido(numTabla,numCelda);
+				codigo += htmlCelda;
+		
+		
+		}
+			
+		codigo +="</div>"
+		
+		document.body.innerHTML += codigo
+	}
+
+</script>
+
+
+</body>
+</html>

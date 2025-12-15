@@ -1,0 +1,41 @@
+.descripcion{
+	font-family:'Courier New', Courier, monospace;
+	font-size:.8em;
+}
+
+h1{
+	font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+
+}
+
+.item { /* color item básico, sin tamaños, pensado para items con texto*/
+	color:aliceblue;
+	text-align:center;
+	background-color:darkblue;
+	margin:  .5em;
+	font-family:'Courier New', Courier, monospace;
+
+}
+
+
+.item-ancho {
+	width:30px;
+	height:30px;
+	margin: .5em;
+	background-color:purple;	
+}
+
+.item-inline{
+	display:inline;
+	background-color:darkgreen;
+}
+.item-inlineblock{
+	display:inline-block;
+	background-color:darkgreen;
+}
+
+.container {
+		background-color:lightyellow;
+		border:1px dashed darkred;
+		margin:10px;
+}

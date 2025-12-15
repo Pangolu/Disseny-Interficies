@@ -1,0 +1,348 @@
+body {
+	background-color:lightyellow;
+	display:flex;
+	align-items:center;
+	flex-direction:column;
+}
+
+.gc { 
+
+	display:grid;
+	grid-template-columns:auto auto auto;
+	
+	/*	grid-auto-flow:row; no necesario, por defecto */
+	width:70vw;
+	column-gap:5px;
+	row-gap:5px;
+ }
+ 
+.gc > div {
+	border:1px solid grey;
+	border-radius:5px;
+
+}
+ 
+.descripcion {
+	align-self:stretch;
+
+	margin-left:10em ;
+	margin-right: 10em;
+	margin-top:1em;
+	margin-bottom:1em;
+
+	border:1px dashed grey;
+	font-family: monospace;
+}
+
+/***Segona taula***/
+body div:nth-child(2 of .gc){
+	background-color: yellow;
+}
+
+/***Quart element***/
+div:nth-child(2 of .gc) > div:nth-child(4){
+	background-color: red;
+}
+
+/***Tercera taula***/
+body div:nth-child(3 of .gc){
+	background-color: rgb(0, 255, 13);
+}
+
+/***Quart element***/
+div:nth-child(3 of .gc) > div:nth-child(4){
+	background-color: rgb(25, 0, 255);
+	color: yellow;
+	grid-column-start: 3;
+}
+
+/***Quarta taula***/
+body div:nth-child(4 of .gc){
+	background-color: rgb(0, 255, 13);
+}
+
+/***Quart element***/
+div:nth-child(5 of .gc) > div:nth-child(5){
+	background-color: rgb(25, 0, 255);
+	color: yellow;
+	grid-column-start: 1;
+}
+
+/***Cinquena taula***/
+body div:nth-child(5 of .gc){
+	background-color: rgb(255, 0, 0);
+}
+
+/***Cinquè element***/
+div:nth-child(4 of .gc) > div:nth-child(5){
+	background-color: rgb(0, 0, 0);
+	color: yellow;
+	grid-column-start: 4; /*No s'ha de fer perque la graella sols te 3 columnes, llavors força a que tinga 4*/
+}
+
+/***Sisena taula***/
+body div:nth-child(6 of .gc){
+	background-color: rgb(255, 125, 125);
+}
+
+/***Cinquè element***/
+div:nth-child(6 of .gc) > div:nth-child(2){
+	background-color: rgb(30, 255, 0);
+	color: yellow;
+	
+}
+
+div:nth-child(6 of .gc) > div:nth-child(3){
+	background-color: rgb(170, 0, 142);
+	color: yellow;
+	grid-column-start: 3; /*No s'ha de fer perque la graella sols te 3 columnes, llavors força a que tinga 4*/
+}
+
+div:nth-child(6 of .gc) > div:nth-child(4){
+	background-color: rgb(0, 170, 147);
+	color: yellow;
+	grid-column-start: 3; /*No s'ha de fer perque la graella sols te 3 columnes, llavors força a que tinga 4*/
+}
+
+div:nth-child(6 of .gc) > div:nth-child(5){
+	background-color: rgb(0, 20, 204);
+	color: yellow;
+	grid-column-start: 3; /*No s'ha de fer perque la graella sols te 3 columnes, llavors força a que tinga 4*/
+}
+
+/***Setena taula***/
+body div:nth-child(7 of .gc){
+	background-color: rgb(0, 255, 234);
+}
+
+div:nth-child(7 of .gc) > div:nth-child(3){
+	background-color: rgb(0, 20, 204);
+	color: yellow;
+	grid-row-start: 3; /*No s'ha de fer perque la graella sols te 3 columnes, llavors força a que tinga 4*/
+}
+
+/***Huitena taula***/
+body div:nth-child(8 of .gc){
+	background-color: rgb(255, 153, 0);
+}
+
+div:nth-child(8 of .gc) > div:nth-child(3){
+	background-color: rgb(0, 20, 204);
+	color: yellow;
+	grid-row-start: 2;
+}
+
+div:nth-child(8 of .gc) > div:nth-child(7){
+	background-color: rgb(0, 20, 204);
+	color: yellow;
+	grid-row-start: 2; 
+}
+
+/***Novena taula***/
+body div:nth-child(9 of .gc){
+	background-color: rgb(4, 0, 255);
+	grid-template-rows: repeat(6, 25px);
+	gap: 10;
+}
+
+/*Les files son invisibles pero el gap se suma igualment, les files son de 0 pixels*/
+div:nth-child(9 of .gc) > div:nth-child(3){
+	background-color: rgb(255, 153, 0);
+	color: rgb(17, 0, 255);
+	grid-row-start: 6; 
+
+}
+
+/***Decena taula***/
+body div:nth-child(10 of .gc){
+	background-color: rgb(153, 151, 255);
+}
+
+div:nth-child(10 of .gc) > div:nth-child(7){
+	background-color: rgb(255, 0, 191);
+	color: rgb(17, 0, 255);
+	grid-row-start: 2; 
+}
+
+div:nth-child(10 of .gc) > div:nth-child(3){
+	background-color: rgb(30, 255, 0);
+	color: rgb(17, 0, 255);
+	grid-row-start: 2; 
+}
+
+div:nth-child(10 of .gc) > div:nth-child(2){
+	background-color: rgb(255, 0, 0);
+	color: rgb(17, 0, 255);
+	grid-column-start: 1; 
+}
+
+/***Oncena taula***/
+body div:nth-child(11 of .gc){
+	background-color: rgb(0, 174, 255);
+}
+
+div:nth-child(11 of .gc) > div:nth-child(3){
+	background-color: rgb(255, 0, 0);
+	color: #1100ff;
+	grid-row-start: 1; 
+	grid-row-end: 2; 
+}
+
+
+div:nth-child(11 of .gc) > div:nth-child(4){
+	background-color: rgb(4, 0, 255);
+	color: rgb(0, 255, 149);
+	grid-row-start: 1; 
+	grid-row-end: 3; /*en la fila on acaba sense ocupar-la*/
+}
+
+/***Dotzena taula***/
+body div:nth-child(12 of .gc){
+	background-color: rgb(49, 161, 92);
+	color: wheat;
+	grid-template-rows: repeat(5, 1fr);
+}
+
+div:nth-child(12 of .gc) > div:nth-child(4){
+	background-color: rgb(2, 0, 129);
+	color: rgb(0, 255, 149);
+	grid-row-start: 1; 
+	grid-row-end: 3; /*en la fila on acaba sense ocupar-la*/
+
+}
+
+div:nth-child(12 of .gc) > div:nth-child(3){
+	background-color: rgb(4, 0, 255);
+	color: rgb(0, 255, 149);
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+
+/***Tretzena taula***/
+body div:nth-child(13 of .gc){
+	background-color: rgb(161, 49, 142);
+	color: wheat;
+	grid-template-rows: repeat(4, 1fr);
+}
+
+div:nth-child(13 of .gc) > div:nth-child(2){
+	background-color: rgb(255, 0, 0);
+	color: rgb(0, 255, 149);
+	grid-column-end: span 2; /*span indica quan s'ha d'expandir*/
+	grid-row-end: span 2;
+}
+
+/***Catorzena taula***/
+body div:nth-child(14 of .gc){
+	background-color: rgb(238, 228, 143);
+	color: rgb(61, 49, 26);
+	grid-template-columns: repeat(4, 1fr);
+}
+
+div:nth-child(14 of .gc) > div:nth-child(1){
+	background-color: rgb(41, 9, 9);
+	color: rgb(0, 255, 149);
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row-end: span 2; /*span indica quan s'ha d'expandir*/
+	grid-row-start: 1;
+}
+
+div:nth-child(14 of .gc) > div:nth-child(4){
+	background-color: rgb(255, 83, 246);
+	color: rgb(0, 255, 149);
+	grid-column-start: 5;
+	grid-column-end: 8;
+	grid-row-start: 2;
+}
+
+/***Quinzena taula***/
+body div:nth-child(15 of .gc){
+	background-color: rgb(68, 68, 67);
+	color: rgb(212, 211, 209);
+	grid-template-columns: repeat(4, 1fr);
+}
+
+div:nth-child(15 of .gc) > div:nth-child(1){
+	background-color: rgb(83, 255, 83);
+	opacity: 50%;
+	color: rgb(9, 15, 13);
+	grid-column-start: 2;
+	grid-column-end: 5;
+	grid-row-start: 1;
+	grid-row-end: 3;
+}
+
+div:nth-child(15 of .gc) > div:nth-child(4){
+	background-color: rgb(143, 83, 255);
+	opacity: 50%;
+	color: rgb(34, 41, 38);
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+
+}
+
+/***Setzena taula***/
+body div:nth-child(16 of .gc){
+	background-color: rgb(174, 241, 174);
+	color: rgb(61, 49, 26);
+}
+
+div:nth-child(16 of .gc) > div:nth-child(4){
+	background-color: rgb(255, 83, 246);
+	color: rgb(0, 255, 149);
+	grid-row-start: 1;
+}
+
+div:nth-child(16 of .gc) > div:nth-child(3){
+	background-color: rgb(104, 0, 99);
+	color: rgb(0, 255, 149);
+	grid-row-start: 2;
+	grid-column-start:1 ;
+	grid-column-end:3 ;
+}
+
+/***Desetzena taula***/
+body div:nth-child(17 of .gc){
+	background-color: rgb(174, 241, 174);
+	color: rgb(61, 49, 26);
+	grid-template-columns: repeat(4, 1fr);
+	text-align: center;
+}
+
+div:nth-child(17 of .gc) > div:nth-child(1){
+	background-color: rgb(104, 0, 99);
+	opacity: 40%;
+	color: rgb(0, 255, 149);
+	grid-row-start: 1;
+	grid-column-start:1 ;
+	grid-column-end:2;
+}
+
+div:nth-child(17 of .gc) > div:nth-child(2){
+	background-color: rgb(104, 0, 99);
+	opacity: 40%;
+	color: rgb(0, 255, 149);
+	grid-row-start: 1;
+	grid-column-start:1;
+	grid-column-end:3;
+}
+
+div:nth-child(17 of .gc) > div:nth-child(3){
+	background-color: rgb(104, 0, 99);
+	opacity: 40%;
+	color: rgb(0, 255, 149);
+	grid-row-start: 1;
+	grid-column-start:1;
+	grid-column-end:4;
+}
+
+div:nth-child(17 of .gc) > div:nth-child(4){
+	background-color: rgb(104, 0, 99);
+	opacity: 40%;
+	color: rgb(0, 255, 149);
+	grid-row-start: 1;
+	grid-column-start:3;
+	grid-column-end:4;
+}

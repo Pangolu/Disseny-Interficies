@@ -1,0 +1,43 @@
+
+body{
+	background-image:radial-gradient(circle,#ffffdd,#faddff);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	margin:0px;
+}
+
+/********************************************************/
+.grid-item {
+	border:1px solid;
+	border-radius:5px;
+	text-align: center;
+	/*padding:1rem;*/
+	/*padding:0rem 0rem 0rem 0rem;*/
+	font-size:1em;
+	line-height: 100%;
+	
+}
+
+
+.gc {
+	
+	display:grid;
+	grid-template-columns: repeat(2,min-content) max-content 2fr minmax(max-content,1fr);
+	grid-template-rows: repeat(2,1fr) repeat(3,1fr)
+	background-color:lightyellow;
+	opacity:0.7;
+	
+	margin:1em;
+	border: 3px solid red;
+	gap:20px;
+
+	min-height:600px;
+	
+	/* hacer lo siguiente opcional */
+/*	justify-items:end; /* Probar aquÃ­ start, center, stretch */
+/*	align-items:start; /* Probar aquÃ­ start, end, stretch */
+}
+
+.gc .grid-item:nth-child(1) {
+	background-color:blue;
+}	
