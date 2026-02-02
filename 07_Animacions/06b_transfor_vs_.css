@@ -1,0 +1,46 @@
+.tabla {
+	display:grid;
+	grid-template-columns: 1fr 1fr;
+	background-color:grey;
+	justify-items:center;
+	justify-content:center;
+}
+	.box {
+	  width: 300px;
+	  height: 300px;
+	  margin: 1em;
+	/*border:1em green solid;*/
+	 /*outline:0.5em green solid;*/
+	  background-color: red;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 2rem;
+	  color: white;
+	  transition-duration:0s;
+	}
+
+
+
+	.Transformacion:hover {
+	  background-color: lime;
+	  border:3px solid blue;
+	  transform: translate(0, 150px) scale(1, 2); /*amplada, alçada. 1 i 2 representen el valor pel que multipliques. L'ordre de les transformacions importa*/
+	  transition-duration: 2s;
+	  
+	}
+
+
+	.SinTransformacion:hover {
+	   background-color: lime;
+	  transition-duration:1s;
+	  height: 600px;
+	}
+	
+	
+.previo {
+	border:1px solid green;
+
+}	
+	
+	

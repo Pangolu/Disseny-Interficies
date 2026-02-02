@@ -1,0 +1,31 @@
+.eldiv {
+	width:400px;
+	height:200px;
+	background-color:red;
+	margin-bottom:1em;
+}
+
+.eldiv:hover {
+	animation:rodaColors 6s infinite; /* La palabra para animar es "animation", luego el nombre del keyframe, 
+	el tiempo de duracion y "infinite" es que no se detenga nunca mientras el raton este dentro*/
+}
+
+.eldiv2 {
+	width:400px;
+	height:200px;
+	background-color:red;
+}
+
+.eldiv2:hover {
+	
+}
+
+/* Los porcentajes indican una duracion en una linea temporal que el total es de 100%. 
+Pero no se sabe realmente que dura(aqui no se indica, en el "animation" si), 
+lo importante es decir que pasa en cada momento y los momentos son con %  */
+@keyframes rodaColors {
+	25% {background-color: yellow;}
+	50% {background-color: green;}
+	75% {background-color: pink;}
+	100% {background-color: blue;} /* Si se pone un 100% de lo que sea, el "infinite" hace que pase del 100% al 0% muy brusco ya que el elemento recupersa su estado original y vuelve a comenzar */
+}

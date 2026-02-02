@@ -1,0 +1,82 @@
+	.box {
+	  width: 100px;
+	  height: 40px;
+	  margin: 0.5em;
+	  border:1px green solid;
+	 /*outline:0.5em green solid;*/
+	 
+	  background-color: darkblue;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+
+	  color: white;
+	}
+
+	.contenedor {
+		border:1px dashed red;
+		padding:1em;
+	}
+		
+	.contenedor:hover .box {
+	
+	  background-color: darkgreen;
+	  transition-duration: 6s;
+	  transform: translateX(calc( 100vw - 100% - 3em  )   ) ;
+
+	  border:1px solid blue;
+	}
+	
+	.ease {
+	  transition-timing-function: ease;
+	}
+	.ease-in {
+	  transition-timing-function: ease-in;
+	}
+	.ease-out {
+	  transition-timing-function: ease-out;
+	}
+	.ease-in-out {
+	  transition-timing-function: ease-in-out;
+	}
+	.linear {
+	  transition-timing-function: linear;
+	}
+	
+	.bezier {
+		transition-timing-function: cubic-bezier(XXXXXXXXXX) ;
+	
+	}
+	.grande {
+	 width:25em;
+	  }
+	  
+	 .contenedor:hover .expandir {
+	
+	  background-color: darkgreen;
+	  transition-duration: 6s;
+	  transform: scaleX(500%) ;
+
+	  border:1px solid blue;
+	}
+	
+	.expandir {
+	 width: 100px;
+	  height: 40px;
+	  margin: 0.5em;
+	  position:relative;
+	  left:50%;
+	  border:1px green solid;
+	 /*outline:0.5em green solid;*/
+	 
+	  background-color: darkblue;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+
+	  color: white;
+
+	 }
+	
+	
+	

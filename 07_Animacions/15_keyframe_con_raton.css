@@ -1,0 +1,24 @@
+:root {
+	--destinoX:100px;
+	--destinoY:500px;
+}
+
+.mueve {
+	width:30px;
+	height:30px;
+	background-color:red;
+	animation: mover 5s infinite;
+}
+
+@keyframes mover {
+	25%{transform: translateX( calc(var(--destinoX))) translateY( calc(var(--destinoY)));}
+}
+
+
+
+
+
+
+
+
+

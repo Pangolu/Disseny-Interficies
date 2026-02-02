@@ -1,0 +1,428 @@
+/* fondo negro y tipo de letra para la página*/
+:root {
+  --fondo: #2a363b;  /* gris */
+  --texto: #ffcc7c;  /* amarillo groc ocre */
+  --primerplano:#ff847c;  /* rosa */
+}
+	
+body {
+	  margin: 0;
+	  background-color: var(--fondo);
+	  font-family: sans-serif;
+}
+
+/* título de la página */
+	.title {
+	  text-align: center;
+	  color: #aaa;
+	}
+
+/* div que engloba a todos los botones */
+.contenedor {
+	  width: 100%;
+	  margin-left: auto;
+	  margin-right: auto;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: space-between;
+}
+		
+.button {
+
+	width:200px;
+	padding: 0.5rem;
+	margin:0.5em;
+	background:none;
+	color:var(--texto);
+	position:relative;
+	font-size:1.4em;
+}
+
+
+/***************** button--fill *********************/
+
+.button--fill {
+	overflow:hidden;          /* ¡ CLAVE EN ANIMACIONES */
+	position:relative;       /* ¡ CLAVE EN ANIMACIONES */
+	transition:color 1s;
+
+}
+
+.button--fill::before{      /* ¡ CLAVE EN ANIMACIONES */
+	content:"";
+	position:absolute;
+	left:-100%;
+	top:0px;
+	width:100%;
+	height:100%;
+	background-color:var(--texto);
+	transition:transform 1s; /* ¡ CLAVE EN ANIMACIONES */
+	z-index:-1 ;             /* ¡ CLAVE EN ANIMACIONES */
+	
+}
+
+.button--fill:hover {
+	transition:color 1s;
+	color:var(--fondo);
+}
+
+.button--fill:hover::before {  /* ¡ CLAVE EN ANIMACIONES */
+	transform:translateX(100%); /* ¡ CLAVE EN ANIMACIONES */
+}
+
+
+/***************** button--cross *********************/
+
+/* El segundo botón es button-cross. Se basa en dos rectángulos que 
+giran 3D sobre el eje Y y X (respectivamente), ocultándose al Eje Z .
+Al hacer hover, quitan el giro y se muestran */
+
+	.button--cross {
+	  transition: color 0.4s;
+	  transition: transform 1s;
+	  	position:relative;
+	}
+
+	.button--cross:hover {
+	  color: #2a363b;
+	  transition:  color 0.6s ease-in;
+	}
+
+	.button--cross::before,
+	.button--cross::after {
+	  content: "";
+	  position: absolute;
+	  display: block;
+	  width: 90%;
+	  height: 90%;
+	  top: 5%;
+	  left: 5%;
+	  background-color: #ff847c;
+	  transition: transform 6s linear;
+	  z-index: -1;
+	  border-radius: 2px;
+	  box-shadow: 0 0 30px var(--fondo);
+	}
+
+/* establecemos el estado oculto de los rectángulos con rotaciones*/
+	.button--cross::before {
+	  transform: rotateY(90deg);
+	}
+
+	.button--cross::after {
+	  transform: rotateX(90deg);
+	}
+
+/* cuando el ratón pasa por encima, quitamos la rotación */
+	.button--cross:hover::before,
+	.button--cross:hover::after {
+	  transform: rotate(0deg);
+	}
+
+/***************** button--grow *********************/
+
+/* button-grow es el tercer botón. Éste es fácil, tan sólo se engorda 
+el borde (box-shadow) y el espaciamiento entre letras */
+	.button--grow {
+	  letter-spacing: -1px;
+	  transition: box-shadow 0.5s, letter-spacing 0.5s;
+	}
+
+	.button--grow:hover {
+	  letter-spacing: 5px;
+	  box-shadow: 0 0 0 5px #ff847c;
+	}
+
+
+
+/* button--scale-text es el cuarto y es interesante: durante elhover
+se muestra otro texto (gracias al atributo "content" del elemento propio
+html). */
+
+.button--scale-text {
+	position:relative;
+	transition:1s;
+	overflow:hidden;
+}
+
+.button--scale-text:hover {
+	color:var(--fondo);
+}
+
+.button--scale-text::before {
+	content:attr(micontenido);
+	position:absolute;
+	left:-100%;
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	top:0px;
+	width:100%;
+	height:100%;
+	background-color:var(--texto);
+	color:var(--fondo);
+	line-height: 100%;
+	transition:transform 1s; /* ¡ CLAVE EN ANIMACIONES */
+	z-index:+1 ;             /* ¡ CLAVE EN ANIMACIONES */
+}
+
+.button--scale-text:hover::before{
+	
+	transform:translateX(100%); /* ¡ CLAVE EN ANIMACIONES */
+
+
+}
+
+/***************** button--grow *********************/
+
+
+.button--shiney {
+	position:relative;
+	overflow:hidden;
+}
+
+.button--shiney::before  {
+	content:"";
+	position:absolute;
+	left:0px;
+	transform:translateX(-120%) translateY(300%) rotateZ(60deg);
+	background-color:lightgrey;
+	width:100%;
+	height:30%;
+	box-shadow: inset 0 0 2em 0 white, 0 0 4em 1em white;
+	transition:transform 1s;
+	z-index:-1;
+	opacity:80%;
+}
+
+.button--shiney:hover::before {
+	transition: transform 3s;
+	transform:translateX(80%) translateY(100%) rotateZ(60deg);
+	
+}
+
+.button--shiney::after{
+content:"";
+	position:absolute;
+	left:0px;
+	transform:translateX(-120%) translateY(1000%) rotateZ(60deg);
+	background-color:black;
+	width:100%;
+	height:10%;
+	box-shadow: inset 0 0 2em 0 white, 0 0 4em 1em white;
+	transition:transform 1s;
+	z-index:10;
+	}
+
+
+.button--shiney:hover::after {
+	transition: transform 3s;
+	transform:translateX(80%) translateY(400%) rotateZ(60deg);
+	
+}
+
+
+/***************** button--giro *********************/
+
+
+
+.button--giro, .button--giro-contenido {
+	
+	transition: color 0.4s;
+	transition: transform 1s;
+   text-align: center;
+   overflow: hidden;
+  }
+/* Esto es más importante de lo que parece. De normal , el texto es rosa como el bloque que se inserta, por lo que no se vería. hay que cambiar 
+el texto a negro para que se distinga del nuevo fondo. */
+
+  .button--giro:hover {
+	color: #2a363b;
+	transform: perspective(1em) rotate(90deg) scale(0.2,5); 
+	border:none;
+  }
+  
+  .button--giro:hover .button--giro-contenido {
+		  transform: rotate(-90deg) scale(0.2,5);
+  }
+
+
+/*básicamente hay un bloque situado el 100% a la izquierda con 
+absolute, que al hacer hover se desplaza al 0% (encima) */
+  .button--giro::before {
+	content: "";
+	position: absolute; /* estos 6 attr. hacen que se ocupe el */
+	display: block;	  /* espacio del propio botón, cubriéndolo*/
+	width: 100%;        /* totalmente y reemplazando su aspecto */
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #ff847c;
+	transform: translateX(-100%);
+	transition: transform 1s;
+	z-index: -1; /* OJO! el nuevo bloque va por debajo del texto */
+  }
+
+  .button--giro:hover::before {
+	transform: translateX(0);
+	transition:1s;
+  }
+
+
+/*********************** ovalos**************************/
+
+@keyframes animacionBoton {
+	0%   {transform: rotate(9deg) }
+	10%   {transform: rotate(-8deg) }
+	20%   {transform: rotate(7deg) }
+	30%   {transform: rotate(-6deg) }
+	40%   {transform: rotate(5deg) }
+	50%   {transform: rotate(-4deg) }
+	60%   {transform: rotate(3deg) }
+	70%   {transform: rotate(-2deg) }
+	80%   {transform: rotate(2deg) }
+	90%   {transform: rotate(-1deg) }
+	100%   {transform: rotate(1deg) }
+}
+
+.button--ovalos  {
+	overflow:hidden;
+position:relative;
+	text-align: center;
+
+transition: border-radius 5s,  animation 1s;
+}
+
+.button--ovalos:hover {
+   opacity:0.5;
+   animation: animacionBoton 0.5s 1;
+}
+
+.button--ovalos::before{
+   content: "Listos";
+	 position: absolute;
+	 display:flex;
+	 align-items: center;
+	 justify-content:center;
+	 width: 100%;
+	 height: 100%;
+	 top: 0;
+	 left: 0;
+   opacity:0.5;
+   border: 4px solid grey;
+   transform: scaleY(0);
+   line-height:100%;
+ /*	z-index: -1;*/
+   /*transition: background 1s,  transform 1s;*/
+}
+
+
+.button--ovalos:hover::before {		
+   transition:  transform 5s, opacity 3s, border-radius 3s;
+   background:darkblue;
+   opacity:1;
+   transform: scale(1) ;
+   border-radius:50%;
+}
+
+.button--ovalos::after{
+   content: "Ya";
+	 position: absolute;
+	 
+	 display:flex;
+	align-items: center;
+	justify-content:center;
+	 width: 100%;
+	 height: 100%;
+	 top: 0%;
+	 left: 100%;
+   opacity:1;
+   border: 4px solid grey;
+   
+   background-color:white;
+   color:darkblue;
+   transition-delay:1s;
+   transition-duration:1s;
+   line-height:100%;
+	 z-index: 1;
+   /*transition: background 1s,  transform 1s;*/
+}
+
+
+.button--ovalos:hover::after {		
+   
+   
+   color:darkblue;
+   opacity:1;
+   left:0%;
+   top:0px;
+   transition-delay:3s;
+   transition-duration:2s;
+   border-radius:50%;
+   z-index: 1;
+}
+
+
+
+
+/********************** ruedaCuadrado ***************/
+.button--ruedaCuadrado, .contenido {
+	transition: color 0.4s;
+	transition: transform 3s;
+   text-align: center;
+   overflow:hidden;
+  }
+/* Esto es más importante de lo que parece. De normal , el texto es rosa como el bloque que se inserta, por lo que no se vería. hay que cambiar 
+el texto a negro para que se distinga del nuevo fondo. */
+
+  .button--ruedaCuadrado:hover {
+	color: #2a363b;
+  
+	border:none;
+  }
+  
+/*básicamente hay un bloque situado el 100% a la izquierda con 
+absolute, que al hacer hover se desplaza al 0% (encima) */
+  .button--ruedaCuadrado::before {
+	content: "";
+	position: absolute; /* estos 6 attr. hacen que se ocupe el */
+	display: block;	  /* espacio del propio botón, cubriéndolo*/
+	width: 0%;        /* totalmente y reemplazando su aspecto */
+	height: 100%;
+	top: 0;
+	left: 50%;
+	background-color: #ff847c;
+	transform: translateX(-100%);
+	transition: transform 3s;
+	z-index: -1; /* OJO! el nuevo bloque va por debajo del texto */
+  }
+
+  .button--ruedaCuadrado::after {
+	content: "";
+	position: absolute; /* estos 6 attr. hacen que se ocupe el */
+	display: block;	  /* espacio del propio botón, cubriéndolo*/
+	width: 10%;        
+	height: 50%;
+	top: 25%;
+	left: 0;
+	background-color: blue;
+	transform: translateX(-150%) rotate(0deg);
+	transition: transform 3s;
+	
+	z-index: -1; /* OJO! el nuevo bloque va por debajo del texto */
+  }
+
+  .button--ruedaCuadrado:hover::before {
+	transform: translateX(0);
+	width:100%;
+	left:0%;
+	transition:3s;
+  }
+
+  .button--ruedaCuadrado:hover::after {
+	transform: rotateZ(180deg);
+	background-color:white;
+	transition:5s;
+	left:100%;
+  }

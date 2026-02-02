@@ -1,0 +1,214 @@
+body {
+	display:flex;
+	width:100%;
+	justify-content:center;	
+	align-items:center;
+	flex-direction:column;
+
+}
+
+.espaciador {
+ height:8em;
+
+}
+
+
+[class^="box"] {
+	width  : 18em;
+	height : 5em;
+
+}
+
+.box1 {
+	background: pink;
+	color:darkblue;
+}
+
+.box1::before{
+	content: "BEFORE";
+	background-color: yellow;
+	color: red;
+}
+
+.box1::after{
+	content: "AFTER";
+	background-color: yellow;
+	color: red;
+}
+
+
+.box2 {
+	background: pink;
+	color:darkblue;
+}
+
+.box2::before{
+	display: block;
+	content: "BEFORE";
+	background-color: yellow;
+	color: red;
+}
+
+.box2::after{
+	display: block;
+	content: "AFTER";
+	background-color: rgb(255, 0, 0);
+	color: rgb(255, 230, 0);
+}
+
+/*======================================*/
+.box3 {
+	background: pink;
+	color:darkblue;
+}
+
+.box3::before{
+	display: block;
+	content: "BEFORE";
+	background-color: yellow;
+	height: 2em;
+}
+
+.box3::after{
+	display: block;
+	content: "AFTER";
+	background-color: yellow;
+	width: 25em;
+	height: 2em;
+}
+
+/*======================================*/
+.box4 {
+	background: pink;
+	color:darkblue;
+}
+
+.box4::before{
+	background-color: aqua;
+	display: block;
+	content: "BEFORE";
+	height: 90%;
+}
+
+.box4::after{
+	background-color: aqua;
+	display: block;
+	content: "AFTER";
+	height: 50%;
+	width: 50%;
+}
+
+/*======================================*/
+.box5 {
+	background: pink;
+	color:darkblue;
+	position:relative;
+	height:10em;
+}
+
+.box5::before{
+	background-color: aqua;
+	display: block;
+	content: "BEFORE";
+	height: 50%;
+	width: 50%;
+}
+
+.box5::after{
+	background-color: aqua;
+	display: block;
+	content: "AFTER";
+	height: 50%;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	bottom: 0%;
+}
+
+/*======================================*/
+.box6 {
+	background: pink;
+	color:darkblue;
+	position:relative;
+	height:10em;
+}
+
+.box6::before{
+	background-color: aqua;
+	display: block;
+	content: "BEFORE";
+		position: absolute;
+	height: 50%;
+	width: 50%;
+}
+
+.box6::after{
+	background-color: aqua;
+	display: block;
+	content: "AFTER";
+	height: 50%;
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	bottom: 0%;
+}
+
+
+/*================  7  ====================*/
+.box7 {
+	background: pink;
+	color:darkblue;
+	position:relative;
+	height:10em;
+}
+
+.box7::before{
+	background-color: aqua;
+	display: block;
+	content: "BEFORE BEFORE BEFORE";
+	position: absolute;
+	width: min-content;
+	bottom: 100%;
+	left: 100%;
+}
+
+.box7::after{
+	background-color: aqua;
+	display: block;
+	content: "AFTER";
+	width: min-content;
+	position: absolute;
+	left: 100%;
+	top: 100%;
+}
+/*================  8  ====================*/
+.box8 {
+	background: pink;
+	color:darkblue;
+	position:relative;
+	height:5em;
+}
+
+.box8::before{
+	background-color: aqua;
+	display: block;
+	content: "BEFORE BEFORE BEFORE";
+	position: absolute;
+	width: 50%;
+	height: 50%;
+	bottom: 125%;
+	left: 125%;
+}
+
+.box8::after{
+	background-color: aqua;
+	display: block;
+	content: "AFTER";
+	width: 25%;
+	height: 25%;
+	position: absolute;
+	left: 100%;
+	bottom: 100%;
+}
+
+

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel="stylesheet" href="16_eventos_keyframe.css"> 
+
+<script>
+	
+	var root;
+
+	var numIteracion=0;
+
+	var hechoClic = false;
+	var posX,posY  = -100;
+
+	function iterarAnimacion(event){
+		
+		console.log("Iteracion " + numIteracion++);
+		
+		if ( posY < 0 || hechoClic )  return;
+			//ejecuta cuando termina/itera la animación
+		document.documentElement.style.setProperty(
+					'--destinoX', posX+"px");
+		document.documentElement.style.setProperty(
+					'--destinoY', posY+"px");				
+		console.log("num Iteracion " + numIteracion++);
+		
+		hechoClic = false;
+		posY = -2;
+	}
+	
+	function clickRaton(event){
+		// ejecuta con elclic del ratón
+		posX =  event.clientX;
+		posY =  event.clientY;
+		
+		hechoClic = true;
+	}
+
+
+	function inicializar(){	
+		let cuadrado= document.getElementById("cuadrado");
+		
+		cuadrado.addEventListener("animationstart",(event)=> {
+			console.log("animación iniciada");
+		});
+		
+		cuadrado.addEventListener("animationend",(event)=> {
+			console.log("animación finalizada");
+		});
+
+		cuadrado.addEventListener("animationcancel",(event)=> {
+			console.log("animación cancelada");
+		});
+		
+		cuadrado.addEventListener("animationiteration",
+					iterarAnimacion );		
+		
+		document.addEventListener("click",clickRaton);	
+	}
+
+
+	document.addEventListener("DOMContentLoaded", inicializar);
+
+</script>
+
+<style>
+
+</style>
+
+</head>
+
+<body>
+
+<div class="mueve" id="cuadrado"> </div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,90 @@
+body {
+	display:flex;
+	width:100%;
+	justify-content:center;	
+	align-items:center;
+	flex-direction:column;
+
+}
+
+.espaciador {
+	height:5em;
+
+}
+
+.box {
+	background-color:pink;
+	height:2em;
+	width:15em;
+	transition-property: width,height;
+	transition-duration: 2s , 5s;
+	font-family:inherit;
+
+}
+
+.box:hover {
+	height:20em;
+	width:100%;
+	background:blue;
+
+	font-family:monospace;
+}
+
+
+.box2 {
+	background-color:pink;
+	height:2em;
+	width:15em;
+
+	font-family:inherit;
+
+}
+
+.box2:hover {
+	height:20em;
+	width:100%;
+	background:blue;
+	color:white;
+	font-weight:bold;
+
+	font-family:monospace;
+}
+
+
+.box3 {
+	background-color:pink;
+	height:2em;
+	width:15em;
+
+	font-family:inherit;
+
+}
+
+.box3:hover {
+	height:20em;
+	width:100%;
+
+	font-family:monospace;
+}
+
+.box4 {
+	background-color:pink;
+	height:2em;
+	width:15em;
+
+	font-family:inherit;
+
+}
+
+.box4:hover {
+	height:20em;
+	width:100%;
+
+	font-family:monospace;
+}
+
+
+
+
+
+

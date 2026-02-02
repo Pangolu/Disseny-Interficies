@@ -1,0 +1,41 @@
+        body {
+            background-color:#aaffcc;
+            display:grid;
+            place-items:center;
+            min-height: 400px;
+
+        }
+        .corazon {
+            background-color: red;
+            width:100px;
+            height:100px;
+            position:relative;
+            transform: rotate(-45deg);
+            animation: palpitar 2s infinite;
+        }
+
+        .corazon::before, .corazon::after{
+            content:"";
+            position:absolute;
+            width:100%;
+            height:100%;
+            
+            border-radius: 50%;
+            background-color: red;
+
+        }
+        .corazon::after {
+            left:50%;
+        }
+
+        .corazon::before{
+            top:-50%;
+        }
+
+@keyframes palpitar {
+    25%{scale: 2;}
+}
+
+@keyframes girar {
+    25%{transform: rotate(140deg);}
+}

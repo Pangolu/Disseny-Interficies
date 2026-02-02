@@ -35,8 +35,8 @@ body{
 	min-height:600px;
 	
 	/* hacer lo siguiente opcional */
-/*	justify-items:end; /* Probar aquÃ­ start, center, stretch */
-/*	align-items:start; /* Probar aquÃ­ start, end, stretch */
+	/*	justify-items:end; /* Probar aquÃ­ start, center, stretch */
+	/*	align-items:start; /* Probar aquÃ­ start, end, stretch */
 }
 
 .gc>div:nth-child(1){

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="15_keyframe_con_raton.css"> 
+<script>
+	
+	var root;
+
+	function clicRaton(evento) {	
+		root.setProperty('--destinoX',evento.clientX+"px");
+		root.setProperty('--destinoY',evento.clientY+"px");	
+	}
+
+	function inicializar(){	
+		root = document.documentElement.style;
+		document.addEventListener("click",clicRaton);	
+	}
+
+
+	document.addEventListener("DOMContentLoaded", inicializar);
+
+</script>
+
+<style>
+
+</style>
+
+</head>
+
+<body>
+
+<div class="mueve"> </div>
+
+
+</body>
+</html>
+

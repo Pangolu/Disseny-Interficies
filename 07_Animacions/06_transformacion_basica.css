@@ -1,0 +1,28 @@
+	.boxTransformacion {
+	  width: 300px;
+	  height: 300px;
+	  margin: 1em;
+	/*border:1em green solid;*/
+	 /*outline:0.5em green solid;*/
+	  background-color: red;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 2rem;
+	  color: white;
+	  transition-duration:0s;
+	}
+
+	.boxTransformacion:hover {
+	  background-color: lime;
+	  transition-duration: 1s;
+	  transform: translate(0px,200px) ;/*horitzontal - vertical*/
+	  border:3px solid blue;
+	}
+		
+.previo {
+	border:1px solid green;
+
+}	
+	
+	

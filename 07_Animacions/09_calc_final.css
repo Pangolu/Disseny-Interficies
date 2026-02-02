@@ -1,0 +1,40 @@
+:root {
+	--anchura:100px;
+}
+
+	.contenedor {
+		border:1px dashed red;
+		padding:1em;
+	}
+		
+	.contenedor:hover .boxMueveDiv {
+	
+	  background-color: lime;
+	  transition-duration: 6s;
+	  transform: translateX( calc( 100% ) );
+	  transform: translateX(calc( 100vw - var(--anchura) - 3em  )) ;
+
+	  border:3px solid blue;
+	}
+
+		.boxMueveDiv {
+	  width: var(--anchura);
+	  height: 40px;
+	  margin: 0px;
+	  border:1px green solid;
+	 /*outline:0.5em green solid;*/
+	  background-color: red;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+
+	  color: white;
+	}
+	
+	
+	
+	
+	
+	
+	
+	

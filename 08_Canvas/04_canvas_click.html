@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+
+
+    <script type="text/javascript">
+	  var canvas;
+ 		var ctx;
+ 		var direccion;
+ 		
+ 		var posX;
+	function dibujar() {
+		console.log("dibujando");
+       if (canvas.getContext) {
+         //ctx = canvas.getContext('2d');
+       
+        ctx.clearRect(0,0,300,300);
+ 		  ctx.fillStyle = 'rgb(200, 0, 0)';
+        ctx.fillRect(posX, 10, 30, 80);
+
+        if (direccion=="derecha"   ) posX += 10;
+        if (direccion=="izquierda" ) posX -=10;
+        
+        if (posX >= 270 )direccion="izquierda";
+        if (posX <= 0) direccion="derecha";
+        
+      //  window.requestAnimationFrame(dibujar);
+ 		}
+	}
+
+	function clic(evento) {
+    var geometria = vancas.getBoundingClientRect();
+    var xIniCanvas = geometria.left;
+    var yIniCanvas = geometria.top;
+
+    var xClick = evento.pageX - xIniCanvas;
+    var yClick = evento.pageY - yIniCanvas;
+	
+	}
+
+
+	function inicializar(){
+		canvas = document.getElementById('tutorial');
+      if (canvas.getContext) {
+          ctx = canvas.getContext('2d');
+      }
+		posX = 100;
+		direccion = "derecha";
+		dibujar();
+		
+		
+		canvas.addEventListener("click", clic);
+		
+}	
+	
+	
+	document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+    	body { display:grid; justify-content:center;}
+      canvas { border: 1px solid black; 
+      			margin:auto; }
+    </style>
+  </head>
+
+
+  <body>
+<div>
+Está situado al centro para complicar la captura del punto
+</div>
+
+    <canvas id="tutorial" width="300" height="300"></canvas>
+  </body>
+</html>
+
+

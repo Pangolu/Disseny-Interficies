@@ -1,0 +1,168 @@
+	
+.contenedor {
+	display:grid;
+	grid-template-columns: 1fr 3fr;
+	background-color:grey;
+	grid-gap:1em;
+	justify-content:center;
+
+
+}
+.descripcion {
+	margin:1em;
+	background-color:white;
+	visibility: hidden;
+}
+
+.box  {
+	  width: 200px;
+	  height: 200px;
+	  margin: 1em;
+	
+	  background-color: red;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 2rem;
+	  color: white;
+	}
+	
+
+.t1:hover {
+	  background-color: lime;
+	  transition-duration: 1s;
+	
+	transform: translate(100%);
+	  border:3px solid blue;
+}
+
+
+.t2:hover{
+	  background-color: lime;
+	  transition-duration: 1s;
+
+	  transform: rotate(45deg);
+	  border:3px solid blue;
+
+}
+
+.t3:hover{
+	  background-color: lime;
+	  transition-duration: 3s;
+	transform: rotate(405deg);
+
+	  border:3px solid blue;
+
+}
+.t4:hover{
+	  background-color: pink;
+	  transition-duration: 3s;
+
+	transform: rotateX(45deg);
+	  border:3px solid blue;
+
+}
+
+
+.t5:hover{
+	  background-color: lime;
+	  transition-duration: 1s;
+
+	transform: scaleY(200%);
+	  border:3px solid blue;
+
+}
+
+.t6:hover{
+	  background-color: orange;
+	  transition-duration: 1s;
+	transform: skew(45deg);
+
+	  border:3px solid blue;
+
+}
+
+
+.t7:hover{
+	  background-color: green;
+	  color:white;
+	  transition-duration: 1s;
+
+	transform: skew(45deg) rotate(45deg);
+	  border:3px solid blue;
+
+}
+
+
+.t81:hover{
+	  background-color: darkgreen;
+	  color:white;
+	  transition-duration: 4s;
+
+		transform: translate(300%) rotate(720deg);
+
+	  border:3px solid blue;
+}
+
+.t82:hover{
+	  background-color: darkgreen;
+	  color:white;
+	  transition-duration: 4s;
+
+
+	  border:3px solid blue;
+}
+
+.t9:hover{
+	  background-color: cyan;
+	  color:white;
+	  transition-duration: 1s;
+
+	transform: rotate(20deg) scale(2, 1);
+	  border:3px solid blue;
+}
+
+.t10:hover{
+	  background-color: cyan;
+	  color:white;
+	  transition-duration: 3s;
+	transform: scale(0.5, 2) rotate(90deg) translate(200px);
+
+	  border:3px solid blue;
+}
+/* EN LA SIguiente sólo cambia el órden de las transformaciones !!!! */
+.t11:hover{
+	  background-color: cyan;
+	  color:white;
+	  transition-duration: 3s;
+	transform: scale(0.5, 2)  translate(300px) rotate(90deg);
+
+	  border:3px solid blue;
+}
+.t12:hover{
+	  background-color: yellow;
+	  color:white;
+	  transition-duration: 4s;
+
+	  border:3px solid blue;
+}
+
+
+
+.t13:hover{
+	  background-color: green;
+	  color:white;
+	  transition-duration: 4s;
+	  transform: rotateX(75deg) rotateY(30deg);
+
+	  border:3px solid blue;
+}
+
+
+
+.previo {
+	border:1px solid green;
+
+}	
+	
+	

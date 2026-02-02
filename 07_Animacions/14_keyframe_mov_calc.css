@@ -1,0 +1,19 @@
+:root {
+	--anchura: 30px; /* Esta variable se puede utiliza más abajo. Para utilizarla se pone -> "var(--nombreVariable)" */
+}
+body{
+	margin:0px;
+}
+.mueve {
+	width:30px;
+	height:30px;
+	background-color:pink;
+	/*transition-duration: 2s;*/
+	animation: muevete 6s infinite;
+}
+
+@keyframes muevete {
+	25% {transform: translateX( calc(100vw - 100%));}
+	50% {transform: translateX( calc(100vw - 100%)) translateY( calc(100vh - 100%)) ;}
+	75% {transform: translateY( calc(100vh - 100%));}
+}

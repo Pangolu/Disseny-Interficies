@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="17_corazon_palpitante.css"> 
+    <title>Document</title>
+
+      
+    <script>
+ function inicializar(){
+    let corazon =  document.getElementById("corazon");
+    corazon.addEventListener('animationstart', (event) => {
+              console.log("start");
+
+    } );
+    corazon.addEventListener('animationend', (event) => {
+            console.log("start");
+
+    } ) ;
+    corazon.addEventListener('animationcancel', (event) => {
+             console.log("start");
+
+    } );
+    
+     let cont=0;
+     
+     
+    corazon.addEventListener('animationiteration' ,(event) => {
+        console.log("start");cont++;
+        corazon = document.getElementById("corazon");
+        
+        if(cont%2==1){
+            corazon.style.animationName = "palpitar";
+        }else{
+            corazon.style.animationName = "girar";
+            cont--;
+        }
+                
+     } );
+  }
+        document.addEventListener("DOMContentLoaded",inicializar);
+    </script>
+</head>
+<body>
+    <div class="corazon" id="corazon"></div>
+</body>
+</html>
