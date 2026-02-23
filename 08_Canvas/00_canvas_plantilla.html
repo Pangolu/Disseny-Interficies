@@ -5,27 +5,42 @@
     <title>Canvas tutorial</title>
 
     <script type="text/javascript">
+      // Contexto 2D global del canvas. Se inicializa en `inicializar`.
       var ctx;
 
+      // Función que dibuja dos rectángulos superpuestos.
+      // Se ejecuta al hacer click en el botón.
       function dibujar() {
 
+        // Solo dibujamos si el canvas soporta contexto 2D y ya está asignado.
         if(ctx){
+          // Primer rectángulo: rojo opaco.
           ctx.fillStyle = 'red';
           ctx.fillRect(10,10,30,60);
+
+          // Segundo rectángulo: verde semitransparente para mostrar solapamiento.
           ctx.fillStyle = 'rgba(0,255,0,0.5)';
           ctx.fillRect(20,20,40,40);
         }
       }
 
+      // Flujo de arranque:
+      // 1) Localiza el canvas en el DOM.
+      // 2) Obtiene el contexto 2D.
+      // 3) Conecta el botón con la función de dibujo.
       function inicializar() {
+        // Obtenemos la referencia al elemento <canvas>.
         canvas = document.querySelector("#tutorial");
 
-        //Esto es per a saber si existeix el canvas
+        // Esto comprueba que el navegador soporta Canvas 2D.
         if (canvas.getContext) ctx = canvas.getContext("2d");
+
+        // Registramos el evento click del botón para dibujar bajo demanda.
         var boton = document.getElementById("boton");
         boton.addEventListener("click", dibujar);
       }
 
+      // Esperamos a que el DOM esté cargado antes de buscar elementos.
       document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">

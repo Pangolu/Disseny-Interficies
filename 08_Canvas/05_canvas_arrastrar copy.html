@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+
+
+    <script type="text/javascript">
+    
+// Modelo de datos: colección de rectángulos arrastrables.
+var elementos = [
+{
+    colour: '#05EAFF',
+    width: 80,
+    height: 80,
+    top: 20,
+    left: 15
+},
+{
+    colour: '#05EF32',
+    width: 100,
+    height: 150,
+    top: 120,
+    left: 115
+},
+{
+    colour: '#FF0000',
+    width: 75,
+    height: 100,
+    top: 150,
+    left: 155
+}
+
+];
+    
+    
+	  // Referencia al canvas.
+	  var canvas;
+	  // Contexto 2D para renderizar.
+ 		var ctx;
+	  // No se utiliza en esta versión; queda del ejemplo previo.
+ 		var direccion;
+	  // Índice del elemento seleccionado para arrastre.
+ 		var elementoSeleccionado;
+   // No se utiliza en esta versión; queda del ejemplo previo.
+   var posX;
+   // Indica si el botón del ratón está pulsado sobre un elemento.
+   var botonHundido = false;
+   // Última posición del ratón para calcular desplazamiento incremental.
+   var x_ant,y_ant;
+ 		
+	// Render principal: limpia y dibuja todos los rectángulos del array.
+	function dibujar() {
+		console.log("dibujando");
+       		if (canvas.getContext) {
+         //ctx = canvas.getContext('2d');
+		 // Borra toda la superficie del canvas antes de redibujar.
+         ctx.clearRect(0,0,canvas.width,canvas.height);
+		 // Recorre cada elemento y lo pinta con su color/tamaño/posición actual.
+       	for ( i=0; i <elementos.length; i++) {
+       		ctx.fillStyle = elementos[i].colour;
+       		ctx.fillRect(elementos[i].left,
+       						elementos[i].top,
+       						elementos[i].width,	
+       						elementos[i].height)
+       	}
+        
+
+ 		}
+	}
+
+
+	// `mousedown`: detecta si el usuario pulsa dentro de algún rectángulo.
+	function down(evento){
+		// Obtener posición relativa al canvas
+		var rect = canvas.getBoundingClientRect();
+		var x = evento.clientX - rect.left;
+		var y = evento.clientY - rect.top;
+		
+		// Buscar si se clickeó en algún elemento (desde el último dibujado al primero).
+		// Esto prioriza el elemento "encima" en caso de solape visual.
+		for (var i = elementos.length - 1; i >= 0; i--) {
+			if (x >= elementos[i].left && x <= elementos[i].left + elementos[i].width &&
+				y >= elementos[i].top && y <= elementos[i].top + elementos[i].height) {
+				// Guardamos qué elemento arrastramos y activamos modo drag.
+				elementoSeleccionado = i;
+				botonHundido = true;
+				// Guardamos punto inicial para medir deltas en `move`.
+				x_ant = x;
+				y_ant = y;
+				break;
+			}
+		}
+	}
+
+	// `mousemove`: si hay drag activo, traslada el rectángulo seleccionado.
+	function move(evento) {
+		if (botonHundido && elementoSeleccionado !== undefined) {
+			// Obtener posición relativa al canvas
+			var rect = canvas.getBoundingClientRect();
+			var x = evento.clientX - rect.left;
+			var y = evento.clientY - rect.top;
+			
+			// Calcular desplazamiento desde la última muestra.
+			var dx = x - x_ant;
+			var dy = y - y_ant;
+			
+			// Aplicar desplazamiento al elemento seleccionado.
+			elementos[elementoSeleccionado].left += dx;
+			elementos[elementoSeleccionado].top += dy;
+			
+			// Actualizar punto anterior para el siguiente `mousemove`.
+			x_ant = x;
+			y_ant = y;
+			
+			// Redibujar para reflejar nueva posición.
+			dibujar();
+		}
+	}
+	
+	// `mouseup`: finaliza el arrastre.
+	function up() {
+		botonHundido = false;
+		elementoSeleccionado = undefined;
+	}
+
+
+	// Inicialización general del ejemplo.
+	function inicializar(){
+		// Referencia canvas + contexto 2D.
+		canvas = document.getElementById('tutorial');
+     			 if (canvas.getContext) {
+          		ctx = canvas.getContext('2d');
+      	}
+		// Variables heredadas no críticas para la demo.
+		posX = 10;
+		direccion = "derecha";
+		// Primer render con posiciones iniciales.
+		dibujar();
+		
+		
+		//canvas.addEventListener("click", clic);
+		// Listeners del ciclo drag-and-drop.
+		canvas.addEventListener("mousedown", down);
+   		canvas.addEventListener("mouseup", up);		
+		canvas.addEventListener("mousemove", move);   	
+}	
+	
+	
+	// Arranque al cargar el DOM.
+	document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+    	body { display:grid; justify-content:center;}
+      canvas { border: 1px solid black; 
+      			margin:auto; }
+    </style>
+  </head>
+
+
+  <body>
+<div>
+Está situado al centro para complicar la captura del punto
+</div>
+
+    <canvas id="tutorial" width="300" height="300"></canvas>
+  </body>
+</html>
+
+

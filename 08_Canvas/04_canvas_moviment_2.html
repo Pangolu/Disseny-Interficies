@@ -5,40 +5,54 @@
     <title>Canvas tutorial</title>
 
     <script type="text/javascript">
+      // Contexto 2D del canvas.
       var ctx;
+      // Coordenada X del cuadrado rojo.
       var inici = 100;
+      // Sentido horizontal: true = derecha, false = izquierda.
       var derecha = true;
 
+      // Bucle de animación: limpiar, dibujar, mover y repetir.
       function dibujar() {
         if (ctx) {
+          // Limpia el lienzo para evitar solapamiento entre frames.
           ctx.clearRect(0, 0, 3000, 3000); //netegem tot per a que no es solapen les imatges
+          // Dibuja el cuadrado en su posición actual.
           ctx.fillStyle = "red";
           ctx.fillRect(inici, 100, 100, 100);
+          // Actualiza posición en pasos de 100 píxeles.
           if (derecha) {
             inici = inici + 100;
           } else {
             inici = inici - 100;
           }
+          // Cambio de sentido al extremo derecho.
           if (inici == 1400){
             derecha=false;
           }
+          // Cambio de sentido al extremo izquierdo.
           if (inici == 0){
             derecha = true;
           }
           
+          // Pide el siguiente frame al navegador.
           window.requestAnimationFrame(dibujar);
         }
       }
 
+      // Inicializa canvas y conecta botón de inicio.
       function inicializar() {
+        // Localiza el canvas en el DOM.
         canvas = document.querySelector("#tutorial");
 
-        //Esto es per a saber si existeix el canvas
+        // Comprueba soporte y obtiene contexto 2D.
         if (canvas.getContext) ctx = canvas.getContext("2d");
+        // Click en botón => arranca la animación.
         var boton = document.getElementById("boton");
         boton.addEventListener("click", dibujar);
       }
 
+      // Punto de entrada al cargar el documento.
       document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">

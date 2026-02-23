@@ -5,29 +5,46 @@
     <title>Canvas tutorial</title>
 
     <script type="text/javascript">
+      // Contexto 2D del canvas.
       var ctx;
+
+      // Anchura dinámica del rectángulo. Empieza en 100 y se expande.
       var anchura = 100;
 
+      // Bucle de animación: dibuja un rectángulo y aumenta su anchura.
       function dibujar() {
+        // Si hay contexto válido, podemos dibujar.
         if (ctx) {
+          // Color de relleno para el rectángulo.
           ctx.fillStyle = "red";
+
+          // Dibuja desde (100,100) con anchura variable y altura fija de 100.
           ctx.fillRect(100, 100, anchura, 100);
+
+          // Límite para que no crezca indefinidamente.
           if (anchura < 800) {
             anchura = anchura + 5;
           }
+
+          // Solicita el siguiente frame y mantiene viva la animación.
           window.requestAnimationFrame(dibujar);
         }
       }
 
+      // Prepara canvas y asocia la animación al botón.
       function inicializar() {
+        // Obtiene el canvas por selector.
         canvas = document.querySelector("#tutorial");
 
-        //Esto es per a saber si existeix el canvas
+        // Si el canvas soporta 2D, guardamos su contexto.
         if (canvas.getContext) ctx = canvas.getContext("2d");
+
+        // El primer click dispara el bucle de animación.
         var boton = document.getElementById("boton");
         boton.addEventListener("click", dibujar);
       }
 
+      // Arranque cuando el DOM esté disponible.
       document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">

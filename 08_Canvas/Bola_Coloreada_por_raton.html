@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+    <style type="text/css">
+      canvas { border: 1px solid black;
+      			margin:3em; }
+    </style>
+
+<script>
+
+// Contexto 2D de dibujo.
+var ctx;
+// Coordenadas del círculo que sigue al ratón dentro del canvas.
+var cursor={};
+// Referencia al canvas del DOM.
+var canvas;
+// Posición inicial de la bola autónoma.
+var posX = 100;
+var posY = 300;
+// Tamaño lógico del área de juego usada para rebotes.
+var ancho = 800;
+var alto = 600;
+
+// Marcador del juego.
+var puntos = 0;
+
+/* indica si el cursor no ha salido todavía después de tocar
+raton y bola. Esto evita repetir anotar puntos */
+var dentro = false; 
+// Diámetro compartido por ambos círculos.
+var diametro = 50;
+
+// Velocidad de la bola autónoma.
+var velX = 2;
+var velY = -1;
+
+// Colores de apoyo (no usados por la versión actual de `colorRandom`).
+var colores = ['rgb(255,0,0)','rgb(0,255,0)','rgb(0,0,255)'];
+// Color actual de la bola autónoma y del cursor.
+var colorBola, colorRaton;
+
+
+// Función auxiliar no usada actualmente: devuelve fuerza inversa al diámetro².
+function calcularFuerza(){
+
+	constant = 2;
+	fuerza = constant/(diametro*diametro);
+	return fuerza;
+
+}
+
+// GENERA UN COLOR ALEATORIO PARA LOS CIRCULOS
+function colorRandom(){
+	// Lista de colores disponibles.
+	var colors = ["red", "blue", "green"];
+	// Índice aleatorio uniforme.
+	var index = Math.floor(Math.random() * colors.length);
+	// Devuelve uno de los colores.
+	return colors[index];
+}
+
+// DIBUJA EN EL CANVAS
+function dibujar(){
+
+	// Primero actualiza la física de la bola móvil.
+	actualizarPosicion();
+	// Limpia canvas completo para repintar escena.
+	ctx.clearRect(0,0,800,600);
+	
+	// Dibujo auxiliar de referencia (cuadrado negro pequeño).
+	ctx.fillRect(20,20,20,20);
+	
+	// Dibuja bola autónoma.
+	ctx.fillStyle = colorBola;
+	ctx.beginPath();
+	ctx.arc(posX,posY,diametro/2,0,2*Math.PI);
+	ctx.fill();
+
+	// Dibuja un circulo pequeño siguiendo el raton dentro del canvas.
+	// Solo se dibuja si ya tenemos coordenadas válidas de ratón.
+	if (cursor.x !== undefined && cursor.y !== undefined) {
+		ctx.fillStyle = colorRaton;
+		ctx.beginPath();
+		ctx.arc(cursor.x, cursor.y, diametro/2, 0, 2 * Math.PI);
+		ctx.fill();
+	}
+
+	// Dibuja marcador de puntos.
+	ctx.fillStyle = "black";
+	ctx.font = "50px Arial";
+	ctx.fillText("Puntos " + puntos,300,400);
+
+	
+	// Programa siguiente frame del bucle de animación.
+	window.requestAnimationFrame(dibujar);
+}
+
+// ACTUALIZA LA POSICION DE LA BOLA QUE SE MUEVE SOLA
+function actualizarPosicion(){
+
+	// Mueve la bola según velocidades actuales.
+	posX += velX;
+	posY += velY;
+	
+	// Rebota en las paredes
+	var radio = diametro / 2;
+	// Si toca lateral izquierdo o derecho, invierte X.
+	if (posX - radio < 0 || posX + radio > ancho) {
+		velX *= -1;
+	}
+	// Si toca borde superior o inferior, invierte Y.
+	if (posY - radio < 0 || posY + radio > alto) {
+		velY *= -1;
+	}
+}
+
+
+// Distancia euclídea entre dos puntos.
+function distancia (x1,y1,x2,y2){
+
+	var resultado;
+	
+	resultado = Math.sqrt(Math.pow((x1 - x2),2)+Math.pow((y2 - y1),2));
+	return resultado;	
+}
+
+// CUANDO HACES CLICK REVISA SI COINCIDEN LOS COLORES Y SUMA O RESTA PUNTOS
+function clic(evento){
+	// Calcula distancia entre las dos bolas
+	// Solo evaluamos colisión si el cursor ya está dentro del canvas.
+	if (cursor.x !== undefined && cursor.y !== undefined) {
+		var dist = distancia(posX, posY, cursor.x, cursor.y);
+		// Distancia máxima para considerar contacto entre círculos de igual diámetro.
+		var radioTotal = diametro; // suma de los dos radios
+		
+		if (dist <= radioTotal && colorBola === colorRaton) {
+			// Las bolas se tocan - suma puntos
+			puntos += 1;
+		} else if (dist <= radioTotal && colorBola != colorRaton){
+			// No se tocan - resta puntos
+			puntos -= 1;
+		} else {
+			// Haces click en el canvas sin estar dentro de la bola
+			// Nota: aquí hay un typo en el original (`punto` en vez de `puntos`).
+			punto += 0;
+		}
+	}
+}
+
+// ACTUALIZA LA POSICION DE LA BOLA PEGADA AL RATON
+function moverRaton(evento){
+
+	// Convierte coordenadas de ventana a coordenadas del canvas.
+	// `getBoundingClientRect` permite compensar márgenes y posición real.
+	var rect = canvas.getBoundingClientRect();
+	cursor.x = evento.clientX - rect.left;
+	cursor.y = evento.clientY - rect.top;
+
+}
+
+
+function inicializar() {
+
+	// Obtiene referencia del canvas.
+	canvas = document.getElementById("tutorial");
+	// Recupera contexto 2D si hay soporte.
+	if ( canvas.getContext ) {
+		ctx = canvas.getContext('2d') ;
+	} else 
+	// Si no hay soporte, aborta inicialización.
+	return;
+	
+	// Escucha el movimiento del raton para actualizar la posicion del circulo.
+	canvas.addEventListener("mousemove",moverRaton);
+	
+	// Escucha los clics para sumar o restar puntos.
+	canvas.addEventListener("click",clic);
+
+	// Actualiza los colores cada segundo.
+	// También inicializa colores antes del primer frame.
+	colorBola = colorRandom();
+	colorRaton = colorRandom();
+	// Timer periódico para cambiar color de ambas bolas.
+	setInterval(function () {
+		colorBola = colorRandom();
+		colorRaton = colorRandom();
+	}, 1000);
+	
+	// Arranca bucle de render.
+	dibujar();
+
+}
+
+	// Espera a que el DOM esté listo para inicializar.
+	document.addEventListener("DOMContentLoaded",inicializar);
+</script>
+
+  </head>
+
+
+<body>
+   <div>
+    <button type="button" id="boton"> Dibuja </button> 
+   </div>
+
+   <canvas id="tutorial" width="800" height="600"></canvas>
+  
+
+</body>
+</html>
+
+
+

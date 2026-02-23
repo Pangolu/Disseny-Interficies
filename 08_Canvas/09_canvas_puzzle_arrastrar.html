@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas - Actividad 3 - Puzzle de arrastre</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: grid;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+      }
+
+      canvas {
+        border: 1px solid black;
+        background: #ffffff;
+      }
+
+      .msg {
+        min-height: 24px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Actividad 3: Puzzle con arrastre y encaje</h2>
+    <p>Arrastra cada bloque de color hasta su zona punteada del mismo color.</p>
+    <div class="msg" id="mensaje"></div>
+    <canvas id="puzzle" width="820" height="460"></canvas>
+
+    <script>
+      var canvas;
+      var ctx;
+      var piezas = [];
+      var piezaSeleccionada;
+      var pulsado = false;
+      var xAnt;
+      var yAnt;
+
+      function crearPiezas() {
+        return [
+          {
+            id: "rojo",
+            color: "#ef4444",
+            x: 50,
+            y: 70,
+            w: 120,
+            h: 80,
+            tx: 560,
+            ty: 70,
+            colocada: false,
+          },
+          {
+            id: "azul",
+            color: "#3b82f6",
+            x: 60,
+            y: 200,
+            w: 150,
+            h: 70,
+            tx: 520,
+            ty: 190,
+            colocada: false,
+          },
+          {
+            id: "verde",
+            color: "#22c55e",
+            x: 90,
+            y: 320,
+            w: 110,
+            h: 90,
+            tx: 600,
+            ty: 320,
+            colocada: false,
+          },
+        ];
+      }
+
+      function posicionLocal(evento) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evento.clientX - rect.left,
+          y: evento.clientY - rect.top,
+        };
+      }
+
+      function dibujarObjetivos() {
+        for (var i = 0; i < piezas.length; i++) {
+          var p = piezas[i];
+          ctx.setLineDash([8, 6]);
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = 2;
+          ctx.strokeRect(p.tx, p.ty, p.w, p.h);
+
+          ctx.setLineDash([]);
+          ctx.fillStyle = "#111827";
+          ctx.font = "14px Arial";
+          ctx.fillText("Zona " + p.id, p.tx, p.ty - 8);
+        }
+      }
+
+      function dibujarPiezas() {
+        for (var i = 0; i < piezas.length; i++) {
+          var p = piezas[i];
+          ctx.fillStyle = p.color;
+          ctx.fillRect(p.x, p.y, p.w, p.h);
+        }
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        dibujarObjetivos();
+        dibujarPiezas();
+      }
+
+      function buscarPieza(x, y) {
+        for (var i = piezas.length - 1; i >= 0; i--) {
+          var p = piezas[i];
+          if (
+            x >= p.x &&
+            x <= p.x + p.w &&
+            y >= p.y &&
+            y <= p.y + p.h &&
+            !p.colocada
+          ) {
+            return i;
+          }
+        }
+        return -1;
+      }
+
+      function down(evento) {
+        var punto = posicionLocal(evento);
+        var index = buscarPieza(punto.x, punto.y);
+
+        if (index === -1) return;
+
+        piezaSeleccionada = index;
+        pulsado = true;
+        xAnt = punto.x;
+        yAnt = punto.y;
+      }
+
+      function move(evento) {
+        if (!pulsado || piezaSeleccionada === undefined) return;
+
+        var punto = posicionLocal(evento);
+        var dx = punto.x - xAnt;
+        var dy = punto.y - yAnt;
+
+        piezas[piezaSeleccionada].x += dx;
+        piezas[piezaSeleccionada].y += dy;
+
+        xAnt = punto.x;
+        yAnt = punto.y;
+
+        render();
+      }
+
+      function estaCercaDeObjetivo(pieza) {
+        var margen = 18;
+        return (
+          Math.abs(pieza.x - pieza.tx) <= margen && Math.abs(pieza.y - pieza.ty) <= margen
+        );
+      }
+
+      function comprobarCompletado() {
+        for (var i = 0; i < piezas.length; i++) {
+          if (!piezas[i].colocada) {
+            return;
+          }
+        }
+
+        document.getElementById("mensaje").textContent =
+          "¡Puzzle completado! Ahora prueba a programar un botón de reinicio.";
+      }
+
+      function up() {
+        if (piezaSeleccionada === undefined) {
+          pulsado = false;
+          return;
+        }
+
+        var p = piezas[piezaSeleccionada];
+
+        if (estaCercaDeObjetivo(p)) {
+          p.x = p.tx;
+          p.y = p.ty;
+          p.colocada = true;
+        }
+
+        pulsado = false;
+        piezaSeleccionada = undefined;
+        render();
+        comprobarCompletado();
+      }
+
+      function inicializar() {
+        canvas = document.getElementById("puzzle");
+        ctx = canvas.getContext("2d");
+        piezas = crearPiezas();
+        render();
+
+        canvas.addEventListener("mousedown", down);
+        canvas.addEventListener("mousemove", move);
+        canvas.addEventListener("mouseup", up);
+        canvas.addEventListener("mouseleave", up);
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+  </body>
+</html>

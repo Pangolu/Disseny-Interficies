@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas - Actividad 1 - Pizarra de dibujo</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: grid;
+        justify-content: center;
+        gap: 12px;
+        padding: 20px;
+      }
+
+      .panel {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      canvas {
+        border: 1px solid black;
+        background: white;
+      }
+
+      .hint {
+        margin: 0;
+        color: #444;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Actividad 1: Pizarra de dibujo libre</h2>
+
+    <div class="panel">
+      <label>
+        Color:
+        <input type="color" id="color" value="#1d4ed8" />
+      </label>
+
+      <label>
+        Grosor:
+        <input type="range" id="grosor" min="1" max="30" value="6" />
+      </label>
+
+      <button id="limpiar" type="button">Limpiar</button>
+    </div>
+
+    <p class="hint">Mantén pulsado y mueve el ratón para dibujar.</p>
+
+    <canvas id="lienzo" width="800" height="420"></canvas>
+
+    <script>
+      var canvas;
+      var ctx;
+      var dibujando = false;
+
+      function posicionLocal(evento) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evento.clientX - rect.left,
+          y: evento.clientY - rect.top,
+        };
+      }
+
+      function empezarTrazo(evento) {
+        dibujando = true;
+        var punto = posicionLocal(evento);
+
+        ctx.beginPath();
+        ctx.moveTo(punto.x, punto.y);
+      }
+
+      function dibujar(evento) {
+        if (!dibujando) return;
+
+        var color = document.getElementById("color").value;
+        var grosor = document.getElementById("grosor").value;
+        var punto = posicionLocal(evento);
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = Number(grosor);
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+
+        ctx.lineTo(punto.x, punto.y);
+        ctx.stroke();
+      }
+
+      function pararTrazo() {
+        dibujando = false;
+      }
+
+      function limpiar() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function inicializar() {
+        canvas = document.getElementById("lienzo");
+        ctx = canvas.getContext("2d");
+
+        canvas.addEventListener("mousedown", empezarTrazo);
+        canvas.addEventListener("mousemove", dibujar);
+        canvas.addEventListener("mouseup", pararTrazo);
+        canvas.addEventListener("mouseleave", pararTrazo);
+
+        document.getElementById("limpiar").addEventListener("click", limpiar);
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+  </body>
+</html>

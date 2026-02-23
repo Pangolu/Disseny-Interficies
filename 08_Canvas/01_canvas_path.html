@@ -5,13 +5,20 @@
     <title>Canvas tutorial</title>
 
     <script type="text/javascript">
+      // Contexto 2D global que usaremos para trazar líneas.
       var ctx;
 
+      // Dibuja un único path continuo con varias líneas.
       function dibujar() {
 
+        // Comprobación de seguridad: solo dibujar si hay contexto.
         if(ctx){
 
+          // Inicia un nuevo camino (path) vacío.
           ctx.beginPath();
+
+          // A partir de aquí, cada lineTo añade un segmento
+          // desde el punto actual al punto indicado.
           ctx.lineTo(100,100);
           ctx.lineTo(300,100);
           ctx.lineTo(300,300);
@@ -22,19 +29,26 @@
           ctx.lineTo(300,100);
           ctx.lineTo(200,50);
           ctx.lineTo(100,100);
+
+          // Renderiza el contorno del path con el estilo por defecto.
           ctx.stroke();
         }
       }
 
+      // Inicializa el canvas y enlaza el botón con `dibujar`.
       function inicializar() {
+        // Localiza el canvas en el documento.
         canvas = document.querySelector("#tutorial");
 
-        //Esto es per a saber si existeix el canvas
+        // Verifica soporte de contexto 2D y lo guarda en la variable global.
         if (canvas.getContext) ctx = canvas.getContext("2d");
+
+        // Conecta el click del botón al dibujo del path.
         var boton = document.getElementById("boton");
         boton.addEventListener("click", dibujar);
       }
 
+      // Ejecuta inicialización cuando el DOM ya está listo.
       document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">

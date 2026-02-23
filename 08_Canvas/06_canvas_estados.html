@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Canvas tutorial</title>
+
+
+    <script type="text/javascript">
+   
+   // ------------------------
+   // Estado de la bola 1
+   // ------------------------
+   // Variables para bola 1
+   var posX1, posY1, velX1, velY1, numPunto1;
+   // Ruta (lista de puntos) que seguirá la bola 1.
+   var puntos1 = [];
+   
+   // ------------------------
+   // Estado de la bola 2
+   // ------------------------
+   // Variables para bola 2
+   var posX2, posY2, velX2, velY2, numPunto2;
+   // Ruta (lista de puntos) que seguirá la bola 2.
+   var puntos2 = [];
+   
+   // Tamaño común de ambas bolas.
+   const diametro = 20;
+
+    // Lista de estados lógicos de la demo.
+    var estados = ["poniendoPuntos", "moviendoBola1", "moviendoBola2", "ambas"];
+    // Estado actual (se usa como referencia de fase de ejecución).
+    var fase;
+    // Contador total de clics: 1-4 para bola 1, 5-8 para bola 2.
+    var numClicks = 0;
+
+  // Distancia euclídea entre dos puntos del plano.
+  function distancia (x1,y1,x2,y2){
+
+	var resultado;
+
+resultado = Math.sqrt(Math.pow((x1 - x2),2)+Math.pow((y2 - y1),2));
+	return resultado;
+}
+  // Bucle de render:
+  // - limpia canvas
+  // - dibuja cruces de puntos de ambas rutas
+  // - dibuja bolas cuando ya hay 8 clics
+  function dibujar(){
+
+    // Repite renderizado en cada frame del navegador.
+    window.requestAnimationFrame(dibujar);
+      // Limpia toda el área para redibujar escena completa.
+      ctx.clearRect(0,0,800,600);
+      
+      // Dibujar puntos y cruces de bola 1
+      for ( punto of puntos1) {
+        ctx.beginPath();
+        ctx.moveTo(punto.x - 20, punto.y);
+        ctx.lineTo(punto.x + 20, punto.y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(punto.x, - 20 + punto.y);
+        ctx.lineTo(punto.x, + 20 + punto.y);
+        ctx.stroke();
+      }
+      
+      // Dibujar puntos y cruces de bola 2
+      for ( punto of puntos2) {
+        ctx.beginPath();
+        ctx.moveTo(punto.x - 20, punto.y);
+        ctx.lineTo(punto.x + 20, punto.y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(punto.x, - 20 + punto.y);
+        ctx.lineTo(punto.x, + 20 + punto.y);
+        ctx.stroke();
+      }
+
+      // Dibujar bola 1
+      // Solo se dibuja cuando ya se han marcado los 8 puntos de rutas.
+      if (numClicks >= 8){
+        ctx.fillStyle = "red";
+        ctx.beginPath();
+        ctx.arc(posX1,posY1,diametro/2,0,2*Math.PI);
+        ctx.fill();
+      }
+      
+      // Dibujar bola 2
+      if (numClicks >= 8){
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.arc(posX2,posY2,diametro/2,0,2*Math.PI);
+        ctx.fill();
+      }
+      
+      // Restaura estilo de relleno por defecto (no imprescindible, pero explícito).
+      ctx.fillStyle = "black";
+
+  }
+
+  // Bucle lógico de movimiento (se ejecuta cada 50ms).
+  function frame(){
+    // Movimiento ambas bolas
+    if (numClicks >= 8){
+      // Movimiento bola 1
+      // Avanza en la dirección actual.
+      posX1 = posX1 + velX1;
+      posY1 = posY1 + velY1;
+      
+      // Si se aproxima al siguiente punto objetivo, cambia de tramo.
+      if (numPunto1 < puntos1.length - 1){
+        if (distancia(posX1, posY1, puntos1[numPunto1+1].x, puntos1[numPunto1+1].y) < 10){
+          numPunto1++ ;
+          actualizarDestino1();
+        }
+      }
+      
+      // Movimiento bola 2
+      posX2 = posX2 + velX2;
+      posY2 = posY2 + velY2;
+      
+      // Misma lógica de transición de tramo para la bola 2.
+      if (numPunto2 < puntos2.length - 1){
+        if (distancia(posX2, posY2, puntos2[numPunto2+1].x, puntos2[numPunto2+1].y) < 10){
+          numPunto2++ ;
+          actualizarDestino2();
+        }
+      }
+    }
+  }
+
+  // Recalcula vector velocidad unitario para el tramo actual de bola 1.
+  function actualizarDestino1(){
+    // Si ya está en el último punto, no hay más destino.
+    if (numPunto1 >= puntos1.length - 1)
+      return;
+
+      // Vector dirección entre punto actual y siguiente.
+      velX1 = puntos1[numPunto1 + 1].x - puntos1[numPunto1].x;
+      velY1 = puntos1[numPunto1 + 1].y - puntos1[numPunto1].y;
+
+      // Normalización para que la velocidad tenga módulo 1.
+      var dist = distancia(puntos1[numPunto1+1].x, puntos1[numPunto1+1].y, puntos1[numPunto1].x, puntos1[numPunto1].y);
+      velX1 = (velX1) / dist;
+      velY1 = (velY1) / dist;
+  }
+  
+  // Recalcula vector velocidad unitario para el tramo actual de bola 2.
+  function actualizarDestino2(){
+    // Si ya está en el último punto, no hay más destino.
+    if (numPunto2 >= puntos2.length - 1)
+      return;
+
+      // Vector dirección entre punto actual y siguiente.
+      velX2 = puntos2[numPunto2 + 1].x - puntos2[numPunto2].x;
+      velY2 = puntos2[numPunto2 + 1].y - puntos2[numPunto2].y;
+
+      // Normalización para que la velocidad tenga módulo 1.
+      var dist = distancia(puntos2[numPunto2+1].x, puntos2[numPunto2+1].y, puntos2[numPunto2].x, puntos2[numPunto2].y);
+      velX2 = (velX2) / dist;
+      velY2 = (velY2) / dist;
+  }
+
+
+  // Click sobre canvas:
+  // - recoge puntos de ruta
+  // - tras 4 clics inicia bola 1
+  // - tras 8 clics inicia bola 2 y movimiento simultáneo
+  function clic(evento){
+    // Ignora clics extra una vez configuradas ambas rutas.
+    if (numClicks >= 8)
+      return;
+      
+    // Cálculo de coordenadas del click relativas al canvas.
+    var geometria = canvas.getBoundingClientRect();
+	var xIniCanvas = geometria.left;
+	var yIniCanvas = geometria.top;
+
+	var xClic = evento.pageX - xIniCanvas;
+	var yClic = evento.pageY - yIniCanvas;
+
+    // Contador global de clics de configuración.
+    numClicks++;
+    
+    // Primeros 4 clicks para bola 1
+    if (numClicks <= 4){
+      // Añade punto de ruta de bola 1.
+      puntos1.push({x:xClic, y:yClic});
+      console.log("Click " + numClicks + " - Bola 1: " + puntos1.length + " puntos");
+      
+      if (numClicks == 4){
+        // Cambia de fase y coloca bola 1 en el primer punto.
+        fase = estados[1];
+        numPunto1 = 0;
+        posX1 = puntos1[0].x;
+        posY1 = puntos1[0].y;
+        console.log("Bola 1 iniciada: " + posX1 + " " + posY1);
+        // Prepara velocidad hacia el segundo punto.
+        actualizarDestino1();
+      }
+    }
+    // Siguientes 4 clicks para bola 2
+    else if (numClicks <= 8){
+      // Añade punto de ruta de bola 2.
+      puntos2.push({x:xClic, y:yClic});
+      console.log("Click " + numClicks + " - Bola 2: " + puntos2.length + " puntos");
+      
+      if (numClicks == 8){
+        // Fase final: ambas bolas activas.
+        fase = estados[3];
+        numPunto2 = 0;
+        posX2 = puntos2[0].x;
+        posY2 = puntos2[0].y;
+        console.log("Bola 2 iniciada: " + posX2 + " " + posY2);
+        // Prepara velocidad hacia el segundo punto.
+        actualizarDestino2();
+      }
+    }
+  }
+
+ // Inicializa estado global, arranca bucles y escucha clicks.
+ function inicializar(){
+     
+    // Referencia canvas + contexto 2D.
+    canvas = document.getElementById('canvasito');
+     			 if (canvas.getContext) {
+          		ctx = canvas.getContext('2d');
+      	}
+		// Limpieza de rutas y contador al inicio.
+		puntos1 = [];
+		puntos2 = [];
+		numClicks = 0;
+		// Arranca render continuo.
+		dibujar();
+
+        // Estado inicial: esperando puntos.
+        fase = estados[0];
+        // Arranca bucle de lógica de movimiento.
+        window.setInterval(frame, 50);
+		// Captura clics para definir rutas.
+		canvas.addEventListener("click", clic);
+
+}
+   	
+    // Arranque principal al cargar el DOM.
+    document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+      body { display:flex;
+              justify-content:center}
+    </style>
+  </head>
+
+
+<body>
+   <div>
+    <button type="button" id="boton"> Dibuja </button> 
+   </div>
+
+   <canvas id="canvasito" width="800" height="800"></canvas>
+  
+  
+</body>
+</html>
+
+

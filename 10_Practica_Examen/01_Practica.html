@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas tutorial</title>
+
+    <script type="text/javascript">
+      colorLapiz = "red";
+
+      var pulsado = false;
+
+      var canvas;
+
+      var texto;
+
+      var ctx;
+
+      var ctxTexto;
+
+      var cursor = { x: -1, y: -1 };
+
+      function mantenerPulsado(evento) {
+        pulsado = true;
+
+        //agafa el canvas real
+        var rectanguloCanvas = canvas.getBoundingClientRect();
+        var xCanvas = rectanguloCanvas.left; //agafa la part mes a l'esquerra del canvas
+        var yCanvas = rectanguloCanvas.top; //agafa la part mes dalt del canvas
+
+        var xApretat = evento.pageX - xCanvas;
+        var yApretat = evento.pageY - yCanvas;
+
+        ctx.fillStyle = colorLapiz;
+        ctx.fillRect(xApretat, yApretat, 5, 5);
+      }
+
+      function moverRaton(evento) {
+        if (pulsado) {
+
+          var rectanguloCanvas = canvas.getBoundingClientRect();
+          var xCanvas = rectanguloCanvas.left; //agafa la part mes a l'esquerra del canvas
+          var yCanvas = rectanguloCanvas.top; //agafa la part mes dalt del canvas
+
+          var xMovent = evento.pageX - xCanvas;
+          var yMovent = evento.pageY - yCanvas;
+          ctx.fillStyle = colorLapiz;
+          ctx.fillRect(xMovent, yMovent, 5, 5);
+        }
+      }
+
+      function levantarRaton() {
+        pulsado = false;
+      }
+
+      function dibujar() {
+        if (texto.getContext) {
+          ctxTexto.fillStyle = colorLapiz;
+          ctxTexto.font = "25px Arial";
+          ctxTexto.fillText("Color actual: " + colorLapiz, 10, 30);
+
+          window.requestAnimationFrame(dibujar);
+        } else {
+          console.log("No existeix el context");
+        }
+      }
+
+      function inicializar() {
+        canvas = document.querySelector("#tutorial");
+
+        texto = document.querySelector("#texto");
+        if (canvas.getContext) ctx = canvas.getContext("2d");
+        if (texto.getContext) ctxTexto = texto.getContext("2d");
+
+        var boton = document.getElementById("boton");
+        
+        dibujar();
+
+        canvas.addEventListener("mousedown", mantenerPulsado);
+        canvas.addEventListener("mouseup", levantarRaton);
+        canvas.addEventListener("mousemove", moverRaton);
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button type="button" id="boton">Dibuja</button>
+    </div>
+
+    <canvas id="tutorial" width="700" height="500"></canvas>
+    <br>
+    <canvas id="texto" width="200" height="100"></canvas>
+  </body>
+</html>

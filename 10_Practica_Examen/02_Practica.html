@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas tutorial</title>
+
+    <script type="text/javascript">
+        
+      /** @type {CanvasRenderingContext2D} */
+      var ctx;
+
+      /** @type {HTMLCanvasElement} */
+      var canvas;
+
+      // Array de colores disponibles para las partículas
+      var colors = ["red", "green", "yellow", "blue"];
+      
+      // Array que contendrá todas las partículas activas
+      // Cada partícula es un objeto con: x, y (posición), vx, vy (velocidad), color, tamaño
+      var particulas = [];
+
+      /*
+    API Canvas usada en estas prácticas:
+    - getContext('2d'): activa el modo de dibujo 2D.
+    - fillRect(x,y,w,h): rectángulo relleno.
+    - clearRect(x,y,w,h): borra una zona del canvas.
+    - beginPath(): inicia un trazado nuevo.
+    - moveTo(x,y): mueve el cursor de trazado sin pintar.
+    - lineTo(x,y): añade una línea al trazado actual.
+    - arc(x,y,r,a1,a2): añade arco/círculo al trazado.
+    - stroke(): pinta el contorno del trazado.
+    - fill(): rellena el trazado.
+    - fillText(texto,x,y): dibuja texto.
+    - requestAnimationFrame(fn): programa el siguiente frame de animación.
+     */
+
+      /**
+       * Función que se ejecuta cuando el usuario hace click en el canvas.
+       * Genera 20 partículas (rectángulos) que se dispersarán desde el punto de click.
+       */
+      function generarBoles(esdeveniment) {
+        // 1. Obtener la geometría del canvas en la ventana
+        // getBoundingClientRect() devuelve la posición y tamaño del canvas en la página
+        var rectangleCanvas = canvas.getBoundingClientRect();
+        var xIniciCanvas = rectangleCanvas.left; // Posición X del canvas en la ventana
+        var yIniciCanvas = rectangleCanvas.top;   // Posición Y del canvas en la ventana
+
+        // 2. Convertir coordenadas del click (relativas a la página) a coordenadas internas del canvas
+        var xClicEnCanvas = esdeveniment.pageX - xIniciCanvas;
+        var yClicEnCanvas = esdeveniment.pageY - yIniciCanvas;
+
+        // 3. Generar 20 partículas en el punto de click
+        for (let i = 0; i < 20; i++) {
+          // Generar un ángulo aleatorio entre 0 y 360 grados (en radianes: 0 a 2π)
+          // Esto hace que cada partícula salga en una dirección diferente
+          var angulo = Math.random() * Math.PI * 2;
+          
+          // Generar velocidad aleatoria entre 1 y 4 píxeles por frame
+          var velocidad = 1 + Math.random() * 3;
+
+          // Crear objeto partícula y añadirlo al array
+          particulas.push({
+            x: xClicEnCanvas,        // Posición inicial X (donde se hizo click)
+            y: yClicEnCanvas,        // Posición inicial Y (donde se hizo click)
+            vx: Math.cos(angulo) * velocidad,  // Velocidad horizontal (componente X)
+            vy: Math.sin(angulo) * velocidad,  // Velocidad vertical (componente Y)
+            color: colors[Math.floor(Math.random() * colors.length)], // Color aleatorio del array
+            tamaño: 10               // Tamaño del rectángulo en píxeles
+          });
+        }
+      }
+
+      /**
+       * Bucle principal de animación.
+       * Se ejecuta continuamente (60 veces por segundo aprox).
+       * Actualiza la posición de todas las partículas y las redibuja.
+       */
+      function dibujar() {
+        // 1. Limpiar todo el canvas antes de redibujar
+        ctx.clearRect(0, 0, 500, 500);
+
+        // 2. Recorrer todas las partículas activas
+        // Recorremos desde el final hacia el principio para poder eliminar sin problemas
+        for (let i = particulas.length - 1; i >= 0; i--) {
+          var p = particulas[i]; // Obtener partícula actual
+
+          // 3. Actualizar posición de la partícula sumando su velocidad
+          p.x += p.vx;  // Nueva posición X = posición anterior + velocidad X
+          p.y += p.vy;  // Nueva posición Y = posición anterior + velocidad Y
+
+          // 4. Eliminar partículas que salieron del canvas (con margen de 20px)
+          // Esto evita que el array crezca infinitamente
+          if (p.x < -20 || p.x > 520 || p.y < -20 || p.y > 520) {
+            particulas.splice(i, 1); // Eliminar esta partícula del array
+            continue; // Saltar al siguiente elemento del bucle
+          }
+
+          // 5. Dibujar la partícula en su nueva posición
+          ctx.fillStyle = p.color; // Establecer color de relleno
+          ctx.fillRect(p.x, p.y, p.tamaño, p.tamaño); // Dibujar rectángulo
+        }
+
+        // 6. Programar el siguiente frame de animación
+        // Esto hace que la función dibujar() se ejecute de nuevo en el próximo frame
+        window.requestAnimationFrame(dibujar);
+      }
+
+      /**
+       * Función de inicialización.
+       * Se ejecuta una vez cuando carga la página.
+       */
+      function inicializar() {
+        // 1. Obtener referencia al elemento canvas del HTML
+        canvas = document.getElementById("tutorial");
+
+        // 2. Obtener el contexto 2D para poder dibujar
+        if (canvas.getContext) {
+          ctx = canvas.getContext("2d");
+        }
+
+        // 3. Registrar evento de click en el canvas
+        // Cada vez que se haga click, se ejecutará generarBoles()
+        canvas.addEventListener("click", generarBoles);
+        
+        // 4. Iniciar el bucle de animación
+        dibujar();
+      }
+
+      // Esperar a que el DOM esté completamente cargado antes de inicializar
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button type="button" id="boton">Dibuja</button>
+    </div>
+
+    <canvas id="tutorial" width="500" height="500"></canvas>
+  </body>
+</html>

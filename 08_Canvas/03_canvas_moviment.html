@@ -5,31 +5,47 @@
     <title>Canvas tutorial</title>
 
     <script type="text/javascript">
+      // Contexto 2D global del canvas.
       var ctx;
+
+      // Posición X inicial del cuadrado.
       var inici = 100;
 
+      // Bucle de movimiento horizontal.
       function dibujar() {
 
         if (ctx) {
+          // Limpia el área usada en cada frame para evitar estelas.
           ctx.clearRect(0,0,500,500) //netegem tot per a que no es solapen les imatges 
+
+          // Configura color y dibuja el cuadrado en la posición actual.
           ctx.fillStyle = "red";
           ctx.fillRect(inici, 100, 100, 100);
+
+          // Mientras no llegue al límite, avanza 5 píxeles por frame.
           if (inici < 500) { //estes mesures han de coicidir amb les del clear
             inici = inici + 5;
           }
+
+          // Programa el siguiente frame de la animación.
           window.requestAnimationFrame(dibujar);
         }
       }
 
+      // Inicializa canvas y registra el evento del botón.
       function inicializar() {
+        // Referencia al canvas.
         canvas = document.querySelector("#tutorial");
 
-        //Esto es per a saber si existeix el canvas
+        // Detección de soporte Canvas 2D.
         if (canvas.getContext) ctx = canvas.getContext("2d");
+
+        // El click inicia la animación.
         var boton = document.getElementById("boton");
         boton.addEventListener("click", dibujar);
       }
 
+      // Ejecuta la inicialización cuando termina de cargar el DOM.
       document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">

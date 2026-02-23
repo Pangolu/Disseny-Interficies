@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas tutorial</title>
+
+    <script type="text/javascript">
+      /** @type {CanvasRenderingContext2D} */
+      var ctx;
+
+      /** @type {HTMLCanvasElement} */
+      var canvas;
+
+      var xClickCanvas;
+      var yClickCanvas;
+
+      var xIniciCanvas;
+      var yIniciCanvas;
+
+      var baixada = true;
+
+      var alturaCanviDireccio;
+
+      /*
+    API Canvas usada en estas prácticas:
+    - getContext('2d'): activa el modo de dibujo 2D.
+    - fillRect(x,y,w,h): rectángulo relleno.
+    - clearRect(x,y,w,h): borra una zona del canvas.
+    - beginPath(): inicia un trazado nuevo.
+    - moveTo(x,y): mueve el cursor de trazado sin pintar.
+    - lineTo(x,y): añade una línea al trazado actual.
+    - arc(x,y,r,a1,a2): añade arco/círculo al trazado.
+    - stroke(): pinta el contorno del trazado.
+    - fill(): rellena el trazado.
+    - fillText(texto,x,y): dibuja texto.
+    - requestAnimationFrame(fn): programa el siguiente frame de animación.
+     */
+
+      function clickEnCanvas(evento) {
+        console.log("Click");
+        var rectangleCanvas = canvas.getBoundingClientRect();
+
+        xIniciCanvas = rectangleCanvas.left;
+        yIniciCanvas = rectangleCanvas.top;
+
+        xClickCanvas = 0;
+        yClickCanvas = 0;
+
+        xClickCanvas = evento.pageX - xIniciCanvas;
+        yClickCanvas = evento.pageY - yIniciCanvas;
+
+        dibujar();
+      }
+
+      function dibujar() {
+        console.log("Dibujar");
+
+        ctx.clearRect(0, 0, 1000, 1000);
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(xClickCanvas, yClickCanvas, 30, 30);
+        xClickCanvas = xClickCanvas + 5;
+        if (baixada) {
+          alturaCanviDireccio = xClickCanvas - 20;
+          yClickCanvas = yClickCanvas + 15;
+          if (yClickCanvas >= 1000 - 30) {
+            baixada = false;
+            alturaCanviDireccio = xClickCanvas - 20;
+          }
+        } else {
+          yClickCanvas = yClickCanvas - 10;
+          if (yClickCanvas >= alturaCanviDireccio) {
+            baixada = true;
+          }
+        }
+        window.requestAnimationFrame(dibujar);
+      }
+
+      // Punto de entrada del ejemplo.
+      // Aquí se inicializaría canvas, contexto y eventos cuando se quiera completar la plantilla.
+      function inicializar() {
+        canvas = document.getElementById("tutorial");
+        if (canvas.getContext) {
+          ctx = canvas.getContext("2d");
+        }
+
+        canvas.addEventListener("click", clickEnCanvas);
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+    <style type="text/css">
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <button type="button" id="boton">Dibuja</button>
+    </div>
+
+    <canvas id="tutorial" width="1000" height="1000"></canvas>
+  </body>
+</html>

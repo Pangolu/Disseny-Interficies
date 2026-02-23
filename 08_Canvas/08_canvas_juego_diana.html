@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Canvas - Actividad 2 - Juego de diana</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: grid;
+        justify-content: center;
+        gap: 12px;
+        padding: 20px;
+      }
+
+      .panel {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      canvas {
+        border: 1px solid black;
+        background: #f8fafc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Actividad 2: Juego de diana en movimiento</h2>
+
+    <div class="panel">
+      <strong id="marcador">Puntos: 0</strong>
+      <strong id="tiempo">Tiempo: 30</strong>
+      <button id="iniciar" type="button">Iniciar / Reiniciar</button>
+    </div>
+
+    <canvas id="juego" width="800" height="420"></canvas>
+
+    <script>
+      var canvas;
+      var ctx;
+      var objetivo;
+      var puntos = 0;
+      var tiempoRestante = 30;
+      var enMarcha = false;
+      var relojId;
+      var frameId;
+
+      function crearObjetivo() {
+        return {
+          x: 150,
+          y: 120,
+          radio: 35,
+          vx: 3,
+          vy: 2.5,
+        };
+      }
+
+      function actualizarPanel() {
+        document.getElementById("marcador").textContent = "Puntos: " + puntos;
+        document.getElementById("tiempo").textContent = "Tiempo: " + tiempoRestante;
+      }
+
+      function dibujarObjetivo() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath();
+        ctx.arc(objetivo.x, objetivo.y, objetivo.radio, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(objetivo.x, objetivo.y, objetivo.radio * 0.6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#ef4444";
+        ctx.beginPath();
+        ctx.arc(objetivo.x, objetivo.y, objetivo.radio * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function moverObjetivo() {
+        if (!enMarcha) return;
+
+        objetivo.x += objetivo.vx;
+        objetivo.y += objetivo.vy;
+
+        if (objetivo.x - objetivo.radio <= 0 || objetivo.x + objetivo.radio >= canvas.width) {
+          objetivo.vx *= -1;
+        }
+
+        if (objetivo.y - objetivo.radio <= 0 || objetivo.y + objetivo.radio >= canvas.height) {
+          objetivo.vy *= -1;
+        }
+
+        dibujarObjetivo();
+        frameId = window.requestAnimationFrame(moverObjetivo);
+      }
+
+      function finPartida() {
+        enMarcha = false;
+        window.clearInterval(relojId);
+        window.cancelAnimationFrame(frameId);
+
+        ctx.fillStyle = "#111827";
+        ctx.font = "28px Arial";
+        ctx.fillText("Fin del juego", 300, 190);
+        ctx.font = "22px Arial";
+        ctx.fillText("Puntos: " + puntos, 330, 230);
+      }
+
+      function iniciarJuego() {
+        puntos = 0;
+        tiempoRestante = 30;
+        objetivo = crearObjetivo();
+        enMarcha = true;
+        actualizarPanel();
+        dibujarObjetivo();
+
+        window.clearInterval(relojId);
+        window.cancelAnimationFrame(frameId);
+
+        relojId = window.setInterval(function () {
+          tiempoRestante -= 1;
+          actualizarPanel();
+
+          if (tiempoRestante <= 0) {
+            finPartida();
+          }
+        }, 1000);
+
+        moverObjetivo();
+      }
+
+      function gestionarClick(evento) {
+        if (!enMarcha) return;
+
+        var rect = canvas.getBoundingClientRect();
+        var x = evento.clientX - rect.left;
+        var y = evento.clientY - rect.top;
+
+        var dx = x - objetivo.x;
+        var dy = y - objetivo.y;
+        var distancia = Math.sqrt(dx * dx + dy * dy);
+
+        if (distancia <= objetivo.radio) {
+          puntos += 1;
+          objetivo.radio = Math.max(18, objetivo.radio - 1);
+          objetivo.vx = objetivo.vx > 0 ? objetivo.vx + 0.12 : objetivo.vx - 0.12;
+          objetivo.vy = objetivo.vy > 0 ? objetivo.vy + 0.12 : objetivo.vy - 0.12;
+          actualizarPanel();
+        }
+      }
+
+      function inicializar() {
+        canvas = document.getElementById("juego");
+        ctx = canvas.getContext("2d");
+        objetivo = crearObjetivo();
+        dibujarObjetivo();
+
+        canvas.addEventListener("click", gestionarClick);
+        document.getElementById("iniciar").addEventListener("click", iniciarJuego);
+      }
+
+      document.addEventListener("DOMContentLoaded", inicializar);
+    </script>
+  </body>
+</html>

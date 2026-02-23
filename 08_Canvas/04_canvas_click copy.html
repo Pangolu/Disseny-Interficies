@@ -6,23 +6,33 @@
 
 
     <script type="text/javascript">
+	  // Referencia al elemento canvas.
 	  var canvas;
+ 		// Contexto 2D para dibujar.
  		var ctx;
+ 		// Dirección actual del movimiento horizontal.
  		var direccion;
  		
+ 		// Posición X actual de la barra roja.
  		var posX;
+	// Dibuja un frame y actualiza posición/dirección.
 	function dibujar() {
 		console.log("dibujando");
+       // Verifica que el canvas soporta contexto 2D.
        if (canvas.getContext) {
          //ctx = canvas.getContext('2d');
        
+        // Limpia todo el lienzo para evitar rastro de frames anteriores.
         ctx.clearRect(0,0,300,300);
+		  // Pinta una barra vertical roja en la posición horizontal actual.
  		  ctx.fillStyle = 'rgb(200, 0, 0)';
         ctx.fillRect(posX, 10, 30, 80);
 
+        // Avanza a derecha o izquierda según estado.
         if (direccion=="derecha"   ) posX += 10;
         if (direccion=="izquierda" ) posX -=10;
         
+        // Rebotes en los límites horizontales del canvas.
         if (posX >= 270 )direccion="izquierda";
         if (posX <= 0) direccion="derecha";
         
@@ -30,32 +40,46 @@
  		}
 	}
 
+	// Captura click y traduce coordenadas globales a coordenadas del canvas.
 	function clic(evento) {
-    var geometria = vancas.getBoundingClientRect();
-    var xIniCanvas = geometria.left;
-    var yIniCanvas = geometria.top;
-
-    var xClick = evento.pageX - xIniCanvas;
-    var yClick = evento.pageY - yIniCanvas;
+		// Posición/medidas reales del canvas en pantalla.
+		var geometria=canvas.getBoundingClientRect();
+		var xIniCanvas = geometria.left;
+		var yIniCanvas = geometria.top;
 	
+		// Coordenadas relativas al origen del canvas.
+		var xClic = evento.pageX - xIniCanvas;
+		var yClic = evento.pageY - yIniCanvas ;
+/*		window.alert("clic en " + evento.pageX +
+						 " " + evento.pageY);*/
+		// Muestra el punto clicado dentro del lienzo.
+		window.alert("clic en " + xClic +
+						 "            " + yClic);
 	}
 
 
+	// Inicialización de estado y listeners.
 	function inicializar(){
+		// Referencia al canvas.
 		canvas = document.getElementById('tutorial');
+      // Obtención del contexto 2D si existe soporte.
       if (canvas.getContext) {
           ctx = canvas.getContext('2d');
       }
+		// Estado inicial de la barra.
 		posX = 100;
 		direccion = "derecha";
+		// Dibujo inicial.
 		dibujar();
 		
 		
+		// Activa captura de clics sobre el canvas.
 		canvas.addEventListener("click", clic);
 		
 }	
 	
 	
+	// Ejecuta la inicialización al terminar de cargar el DOM.
 	document.addEventListener("DOMContentLoaded", inicializar);
     </script>
     <style type="text/css">
